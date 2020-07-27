@@ -1,0 +1,133 @@
+.switch{
+    height:40px;
+}
+.changeBtn{
+    display: flex!important;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.changeInp{
+    width:80%;
+    float:right;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-height:40px!important;
+    display: flex;
+}
+.el-form-item__label{
+    width:20%;
+}
+.changeItem{
+    display: flex;
+}
+.changeForm{
+    width:70%;
+    margin:0 auto;
+}
+.tableTitleLeft{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+}
+.tableTip{
+     margin-top: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.tableTitleRight button{
+    margin:0!important;
+}
+.tableTitleRight{
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+.tableTitle{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.table{
+    margin:0 10px;
+    box-shadow: 0 2px 4px 0 rgba(232,237,250,.6);
+    padding:20px 10px;
+    border:1px solid #dedede;
+    border-radius: 10px;
+}
+.pageTitle{
+    margin:20px 10px;
+    box-shadow: 0 2px 4px 0 rgba(232,237,250,.6);
+    padding:32px 10px 10px 10px;
+    border:1px solid #dedede;
+    border-radius: 10px;
+}
+.selectForm{
+    label-width:80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.formItem label{
+    width:70px;
+    text-align: left;
+}
+.formItem,.formBtn{
+    flex-wrap: nowrap;
+    display: flex;
+    margin-right:20px;
+    min-width:30%;
+}
+.formItem>div{
+    width:70%!important;
+}
+.formItem div{
+    width:100%;
+}
+.formItemInp{
+    width:70%;
+}
+.changeItem{
+    display: flex;
+    width: 100%;
+}
+.changeItem lable{
+    width:22%;
+    flex-shrink:0;
+}
+.changeItem>div{
+    display: block;
+    width:78%!important;
+}
+.changeItem div{
+    width:100%;
+}
+.change_form label{
+    text-align: left;
+}
+.dialogButton{
+    justify-content: center!important;
+}
+
+
+
+.chartBox{
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(14,32,45,.9);
+    min-width:1200px;
+    overflow: auto;
+}
+/*.shortChart{*/
+/*    width:49%;*/
+/*    margin:.5%;*/
+/*    height:500px;*/
+/*}*/
+/*.longChart{*/
+/*    width:99%;*/
+/*    margin:.5%;*/
+/*    height:550px;*/
+/*}*/

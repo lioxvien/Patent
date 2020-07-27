@@ -1,0 +1,47 @@
+.sys-header {
+    // position: relative;
+    width: 100%;
+    height: $headerHeight;
+    background-color: $headerBgColor;
+    z-index: 500;
+    display: flex;
+    .logo {
+        height: $headerHeight;
+        line-height: $headerHeight;
+        padding-left: 60px;
+        width: 80px;
+        color: $headerColor;
+        font-size: $headerFontSize;
+    }
+    .hearder-main {
+        flex: 1;
+        height: $headerHeight;
+        &>ul {
+            height: 40px;
+            &>li {
+                height: 40px;
+                line-height: 40px;
+                margin-right: 20px;
+                color: $headerColor;
+                cursor: pointer;
+                color: $headerColor;
+            }
+            &.userInfo>li {
+                float: right;
+                .loginBtn {
+                    color: #f3881a;
+                }
+                .register{
+                    color: #f40;
+                }
+            }
+            &.buyBtn>li {
+                float: left;
+                padding-right: 20px;
+            }
+        }
+    }
+    .editPawDialog{
+        width: 400px;
+    }
+}
