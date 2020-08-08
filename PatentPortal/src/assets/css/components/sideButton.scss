@@ -5,7 +5,52 @@
     height: 200px;
     ul {
         li {
+            width: 46px;
+            height: 46px;
+            line-height: 50px;
+            padding: 2px;
             cursor: pointer;
+            color: transparent;
+            position: relative;
+            border-radius: 3px;
+            p {
+                position: absolute;
+                top: 50%;
+                transform:translateY(-50%);
+                right: 110%;
+                display: none;
+            }
+            &:first-child {
+                background: $QQImg no-repeat center;
+            }
+            &:nth-child(2) {
+                background: $wechatImg no-repeat center;
+            }
+            &:last-child {
+                background: $phoneImg no-repeat center;
+                line-height: 22px;
+                p {
+                    height: 50px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    background: #f2f2f2;
+                }
+            }
+            &:hover {
+                color: #333333;
+                font-size: 16px;
+                background: rgba(255,5,18,0.4);
+                text-align: center;
+                p {
+                    display: block;
+                }
+            }
+            &:nth-child(2):hover {
+                background: rgba(76,191,0,.4);
+            }
+            &:last-child:hover {
+                background: rgba(15,171,209,.4);
+            }
         }
     }
 }

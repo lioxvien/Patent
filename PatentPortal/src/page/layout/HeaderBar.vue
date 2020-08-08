@@ -153,14 +153,14 @@
             })
         },
         methods: {
-              // ...mapActions({
-              //   sysLogout: 'auth/logout',
-              //   loadLang: 'loadLang'
-              // }),
+              ...mapActions({
+                sysLogout: 'auth/logout',
+                // loadLang: 'loadLang'
+              }),
             userOperation(command){
                switch(command){
                     case 'logout':
-                        this.logout()
+                        this.sysLogout()
                         break
                     case 'editPaw':
                         this.dialog.editPaw.show = true
@@ -188,9 +188,6 @@
             },
             toLogin(type) {
                 this.$router.push({path:'/login'})
-            },
-            logout() {
-                console.log('登出')
             },
             editPawSubmit(){
                 console.log('提交修改密码')

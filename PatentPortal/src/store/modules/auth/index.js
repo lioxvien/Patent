@@ -70,11 +70,7 @@ const actions = {
                 userName = Cookies.get('userName');
 
             // 重新登录时校验Token是否存在，跳转到login页面
-            if(!token){
-                this.$router.push('/login')
-            } else {
-                commit('setToken', token)
-            }
+            if(token)  commit('setToken', token)
             // 刷新/关闭浏览器再进入时获取用户名
             commit('user/setName', decodeURIComponent(userName), { root: true });
             dispatch("getNavList").then(()=>{

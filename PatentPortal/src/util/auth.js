@@ -7,11 +7,11 @@ const authToken = {
     tokenTimeoutMethod: 'getNewToken',
 
     // 在Cookie中记录登录状态的key
-    loginKey: 'lzhy-quality-isLogin',
+    loginKey: 'gaozhi-isLogin',
 
     // Token是否超时
     hasToken: function(){
-        return Cookies.get('lzhy-quality-token')
+        return Cookies.get('gaozhi-token')
     },
 
     // 当前是否是登录状态
@@ -23,7 +23,7 @@ const authToken = {
     setToken: function(token){
         // TODO: 设置token，并填写有效期
         var maxAge = new Date(new Date().getTime() + 30 * 60* 1000);
-        Cookies.set('lzhy-quality-token', token, {
+        Cookies.set('gaozhi--token', token, {
             expires: maxAge
         })
     },
@@ -39,7 +39,7 @@ const authToken = {
 
     // 移除Token
     removeToken: function(){
-        Cookies.remove('lzhy-quality-token')
+        Cookies.remove('gaozhi-token')
     },
 
     // 移除登录状态

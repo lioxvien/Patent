@@ -86,3 +86,8 @@ $topSubNavItemHover: darken($topSubNavBg, 5%) !default;
 /* sysNotes */
 $notesBgColor: $lighterGray !default;
 $notesBorderColor: $themeColor !default;
+
+/* img */
+$QQImg: url($baseImageURL + "QQ.png");
+$wechatImg: url($baseImageURL + "wechat.png");
+$phoneImg: url($baseImageURL + "phone.png")

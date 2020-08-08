@@ -5,7 +5,13 @@
 </template>
 
 <script>
+    import Cookies from 'js-cookie'
 export default {
-  name: 'App'
+  name: 'App',
+    beforeMount() {
+      if (Cookies.get('gaozhi-isLogin')) {
+          this.$store.dispatch('auth/relogin');
+      }
+    }
 }
 </script>
