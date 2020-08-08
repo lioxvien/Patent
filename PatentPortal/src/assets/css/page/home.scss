@@ -1,0 +1,19 @@
+.sys-page{
+  .sort {
+      margin-top: 28px;
+      height: 32px;
+      p {
+          float: left;
+          padding: 8px 20px;
+          border: 1px solid #666666;
+          background: #ccc;
+          cursor: pointer;
+          &:nth-child(n+2) {
+              border-left: none;
+          }
+          &.cur {
+              background: #ffffff;
+          }
+      }
+  }
+}

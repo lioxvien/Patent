@@ -7,28 +7,43 @@
         <div class="hearder-main">
             <ul class="userInfo">
                 <li>
-                    <span class="order" @click="myOrder">我的订单</span>
+                    <el-dropdown @command="seeOrder">
+                        <span class="order" @click="myOrder">
+                            我的订单
+                            <i class="el-icon-caret-bottom el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="collection">我的收藏</el-dropdown-item>
+                            <el-dropdown-item command="sale">出售商品</el-dropdown-item>
+                            <el-dropdown-item command="buy">求购商品</el-dropdown-item>
+                            <el-dropdown-item command="paid">已支付订单</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
                 </li>
                 <li>
                     <span class="points" @click="pointsMall">积分商城</span>
                 </li>
-                <li>
-                    <span class="register" @click="pointsMall">免费注册</span>
+                <li v-if="!$store.state.user.name">
+                    <span class="register" @click="toLogin(0)">免费注册</span>
                 </li>
                 <li>
                     <span>您好，</span>
-                    <span class="loginBtn">登录</span>
-                    <el-dropdown @command="userOperation" v-if="$store.state['user/name']">
+                    <span v-if="!$store.state.user.name" class="loginBtn" @click="toLogin(1)">登录</span>
+                    <el-dropdown @command="userOperation" v-else>
                         <span class="user">{{username}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="editPaw">{{$t('global.editpassword')}}</el-dropdown-item>
-                            <el-dropdown-item command="logout">{{$t('global.logout')}}</el-dropdown-item>
+                            <el-dropdown-item command="editPaw">我的邀请码</el-dropdown-item>
+                            <el-dropdown-item command="editPaw">我的QQ</el-dropdown-item>
+                            <el-dropdown-item command="editPaw">我的二维码</el-dropdown-item>
+                            <el-dropdown-item command="editPaw">修改密码</el-dropdown-item>
+                            <el-dropdown-item command="editPaw">修改注册手机号</el-dropdown-item>
+                            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </li>
             </ul>
             <div>
-                <el-input placeholder="请输入内容" v-model="headerSearch.context" style="width: 70%">
+                <el-input placeholder="授权号/商品名称/商品领域" v-model="headerSearch.context" style="width: 70%">
                     <el-select v-model="headerSearch.select" slot="prepend" placeholder="授权号" style="width: 90px">
                         <el-option label="授权号" value="1"></el-option>
                         <el-option label="订单号" value="2"></el-option>
@@ -36,8 +51,8 @@
                     </el-select>
                     <el-button slot="append" icon="el-icon-search"></el-button>
                 </el-input>
-                <el-button>发布出售</el-button>
-                <el-button>发布求购</el-button>
+                <el-button @click="release(0)">发布出售</el-button>
+                <el-button @click="release(1)">发布求购</el-button>
             </div>
             <ul class="buyBtn">
                 <li>
@@ -67,14 +82,17 @@
                 <el-button type="primary" @click="editPawSubmit">保存</el-button>
             </div>
         </el-dialog>
+        <ReleaseSale :dialogVisible="saleDialogVisible" :title='titleDialog' @closeDialog="closeSaleDialog"></ReleaseSale>
     </div>
 </template>
 
 <script>
     import { mapState, mapActions } from 'vuex'
+    import ReleaseSale from '../Popup/ReleaseSale'
 
     export default {
         name: 'HeaderBar.vue',
+        components:{ ReleaseSale },
         data() {
             return {
                 headerSearch: {
@@ -123,14 +141,16 @@
                         }
                     }
                 ]
-            }
+            },
+                saleDialogVisible: false,
+                titleDialog: '发布出售'
             }
         },
         computed: {
-            // ...mapState({
-            //   username: state => state.user.name,
-            //   lang: state => state.lang
-            // })
+            ...mapState({
+              username: state => state.user.name,
+              lang: state => state.lang
+            })
         },
         methods: {
               // ...mapActions({
@@ -150,6 +170,25 @@
                         break;
                     }
             },
+            seeOrder(command) {
+                 switch(command) {
+                     case 'collection':
+                         console.log('我的收藏');
+                         break;
+                     case 'sale':
+                         console.log('出售商品');
+                         break;
+                     case 'buy':
+                         console.log('求购商品');
+                         break;
+                     case 'paid':
+                         console.log('已支付');
+                         break;
+                }
+            },
+            toLogin(type) {
+                this.$router.push({path:'/login'})
+            },
             logout() {
                 console.log('登出')
             },
@@ -158,10 +197,19 @@
             },
             pointsMall() {
                 console.log('积分商城');
+                this.$router.push({path: '/pointsmall'})
             },
             myOrder() {
                 console.log('我的订单');
             },
+            release(type) { // 发布按钮  0 出售 1 求购
+                this.saleDialogVisible = true;
+                type? this.titleDialog='发布求购':this.titleDialog='发布出售'
+            },
+            closeSaleDialog(value) {
+                this.saleDialogVisible = value;
+
+            }
         }
     }
 </script>

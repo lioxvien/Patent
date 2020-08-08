@@ -2,12 +2,45 @@
     width: 100%;
     height: 100%;
     background: $loginBg;
-
+    padding-top: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    .login-header {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        background-color: #ffffff;
+        padding-right: 8%;
+        h1.logo {
+            width: 40%;
+            text-align: center;
+        }
+        .el-row {
+            flex: 1;
+        }
+        div.tabList {
+            padding-left: 50px;
+            font-size: 16px;
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            h1 {
+                margin-bottom: 3px;
+            }
+            p {
+                font-size: 12px;
+            }
+        }
+    }
     .login-area {
-        width: 350px;
-        padding-top: 15%;
-        margin-left: 55%;
-        .logo {
+        width: 300px;
+        height: 360px;
+        float: right;
+        margin-top: 5%;
+        margin-right: 8%;
+        padding: 12px 25px ;
+        background-color: #ffffff;
+        .logo{
             width: 100%;
             height: 100px;
             text-align: center;
@@ -18,15 +51,18 @@
     }
 
     .title{
-        color: white;
-        font-size: 30px;
+        color: #333333;
+        font-size: 18px;
+        padding-bottom: 8px;
         margin: 10px;
+        text-align: center;
+        border-bottom: 2px solid #ff4400;
     }
 
     .form-group {
         margin-top: 10px;
         position: relative;
-        padding-bottom: 20px;
+        //padding-bottom: 20px;
         color: $loginTextColor;
         overflow: hidden;
 
@@ -53,6 +89,7 @@
             }
         }
         .el-form-item{
+            height: 40px;
             &.is-error .el-input__inner{
                 border-color: $red;
                 background-color: $loginInputErrBg;
@@ -77,23 +114,10 @@
     }
 
     .btn-login {
-        display: block;
         width: 100%;
-        height: 40px;
         line-height: 40px;
-        margin: 10px 0;
         padding: 0;
-        background: $loginBtn;
-        border: none;
-        border-radius: 4px;
-        color: $loginTextColor;
         font-size: 18px;
-        text-align: center;
-        cursor: pointer;
-
-        &:hover{
-            background: darken($loginBtn, 2%)
-        }
     }
 
     .err-msg{

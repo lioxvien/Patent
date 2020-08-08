@@ -33,7 +33,7 @@ const actions = {
     loginByEmail({ commit }, userInfo) {
         return new Promise((resolve) => {
             axios({
-                url: '/ user/login',
+                url: '/user/login',
                 method: 'post',
                 data: {
                     "username":userInfo.username,

@@ -43,5 +43,15 @@ const staticRoute = [
         }
       ]
     },
+    {
+        path: '/pointsmall',
+        component: Layout,
+        children:[
+            {
+                path: '',
+                component: () => import('../page/pointsMall')
+            }
+        ]
+    },
   ]
 export default  staticRoute
