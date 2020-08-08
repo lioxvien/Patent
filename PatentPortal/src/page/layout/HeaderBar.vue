@@ -215,4 +215,8 @@
 </script>
 
 <style scoped>
+    .sys-header >>> .el-input-group__append ,
+    .sys-header >>> .el-input-group__prepend {
+        background-color: #ffa64a;
+    }
 </style>

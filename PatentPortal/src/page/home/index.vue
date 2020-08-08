@@ -103,5 +103,7 @@
 </script>
 
 <style scoped>
-
+    .sys-page >>> .el-tabs--border-card>.el-tabs__header{
+        background: #fca851;
+    }
 </style>
