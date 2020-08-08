@@ -2,13 +2,17 @@
   <div class="wrapper">
     <template v-if="layout =='left'">
       <header-bar v-once>
-        <p slot="logo">玩什么</p>
+        <p slot="logo">
+            <img :src="logoIcon" alt="">
+        </p>
       </header-bar>
       <nav-bar :layout="layout"></nav-bar>
     </template>
     <template v-if="layout == 'top'">
       <header-bar>
-        <p slot="logo">随便玩</p>
+        <p slot="logo" style="height: 100%">
+            <img :src="logoIcon" alt="">
+        </p>
 <!--        <template slot="topnav">-->
 <!--          <nav-bar :layout="layout"></nav-bar>-->
 <!--        </template>-->
@@ -28,7 +32,6 @@
   import NavBar from './NavBar'
   import TagNav from './TagNav'
 
-
   export default {
     computed: {
       layout(){
@@ -42,6 +45,11 @@
       HeaderBar,
       NavBar,
       TagNav,
-    }
+    },
+      data() {
+          return {
+              logoIcon: require('../../assets/images/SanYouLogo.png')
+        }
+      }
   }
 </script>

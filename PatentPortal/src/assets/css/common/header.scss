@@ -12,6 +12,10 @@
         width: 80px;
         color: $headerColor;
         font-size: $headerFontSize;
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
     .hearder-main {
         flex: 1;
