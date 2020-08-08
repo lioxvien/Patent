@@ -11,18 +11,18 @@ var data ={
             "id":4,
             "sort":4,
             "child": [{
-                    "path": "/orderManagement",
-                    "name": "订单管理",
-                    "id":41,
-                    "sort":41
-                },
+                "path": "/orderManagement",
+                "name": "订单管理",
+                "id":41,
+                "sort":41
+            },
                 {
                     "path": "/orderInvoice",
                     "name": "发票",
                     "id":42,
                     "sort":42
-            }]
-    },
+                }]
+        },
         {
             "name": "消息",
             "path": "/newsManagement",
@@ -80,12 +80,12 @@ var data ={
                 "id":101,
                 "sort": 4
             },
-            {
-                "path": "/operatingLog",
-                "name": "用户操作日志",
-                "id":102,
-                "sort": 4
-            }]
+                {
+                    "path": "/operatingLog",
+                    "name": "用户操作日志",
+                    "id":102,
+                    "sort": 4
+                }]
         },
     ]
 };

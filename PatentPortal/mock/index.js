@@ -5,6 +5,7 @@ import navlist from './navlist'
 import getRoleList from './roleList'
 import userList from './userList'
 import buyGoodsList from './getBuyGoodsList'
+import conditionList from './conditionList'
 import Vue from 'vue'
 
 
@@ -17,4 +18,5 @@ console.log('data',data)
 Mock.mock(/\/user\/login/, login[0].data)
 Mock.mock(/\/getBuyGoodsList/, buyGoodsList[0].data)
 Mock.mock(/\/auth\/getNavList/, navlist[0].data)
+Mock.mock(/\/getConditionList/, conditionList[0].data)
 export default Mock
