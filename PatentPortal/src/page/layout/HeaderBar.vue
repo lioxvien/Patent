@@ -43,7 +43,7 @@
                 </li>
             </ul>
             <div>
-                <el-input placeholder="授权号/商品名称/商品领域" v-model="headerSearch.context" style="width: 70%">
+                <el-input placeholder="授权号/商品名称/商品领域" v-model="headerSearch.context" class="headerSearch">
                     <el-select v-model="headerSearch.select" slot="prepend" placeholder="授权号" style="width: 90px">
                         <el-option label="授权号" value="1"></el-option>
                         <el-option label="订单号" value="2"></el-option>

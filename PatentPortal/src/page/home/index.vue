@@ -106,4 +106,10 @@
     .sys-page >>> .el-tabs--border-card>.el-tabs__header{
         background: #fca851;
     }
+    .sys-page >>> .el-tabs--border-card>.el-tabs__header .el-tabs__item {
+        color: #303133;
+    }
+    .sys-page >>> .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
+        font-size: 15px;
+    }
 </style>

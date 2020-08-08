@@ -29,6 +29,9 @@
                 color: $headerColor;
                 cursor: pointer;
                 color: $headerColor;
+                .order:hover, .points:hover {
+                    color: red;
+                }
             }
             &.userInfo>li {
                 float: right;
@@ -42,6 +45,18 @@
             &.buyBtn>li {
                 float: left;
                 padding-right: 20px;
+            }
+        }
+        .headerSearch {
+            width: 70%;
+            margin: 0 20px;
+        }
+        .buyBtn {
+            margin-left: 20px;
+            li {
+                .el-button {
+                    color: #f40;
+                }
             }
         }
     }
