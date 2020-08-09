@@ -1,15 +1,15 @@
 .condition{
     ul {
         li {
-            &:first-child {
-                span {
-                    vertical-align: 43px;
-                }
-            }
-            &:nth-child(n+2) {
+            //&:first-child {
+            //    span {
+            //        vertical-align: 43px;
+            //    }
+            //}
+            //&:nth-child(n+2) {
                 height: 28px;
                 line-height: 28px;
-            }
+            //}
             span {
                 padding: 8px 15px;
                 cursor: pointer;

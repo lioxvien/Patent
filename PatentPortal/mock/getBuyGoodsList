@@ -132,6 +132,6 @@ let data = {
         }]
 };
 export default [{
-    path: '/getBuyGoodsList',
+    path: '/getAllBuyGoodsList',
     data: data
 }]
