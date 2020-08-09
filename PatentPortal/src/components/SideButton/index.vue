@@ -25,7 +25,7 @@
 </template>
 <script>
     export default{
-        name: 'SIdentify',
+        name: 'sideButton',
         props:['page'],
         data() {
             return {
@@ -39,7 +39,6 @@
 
         },
         mounted () {
-            console.log(this.page)
         }
     }
 </script>

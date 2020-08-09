@@ -8,8 +8,9 @@
     .logo {
         height: $headerHeight;
         line-height: $headerHeight;
-        padding-left: 60px;
-        width: 80px;
+        padding: 20px 0 20px 60px;
+        box-sizing: border-box;
+        width: 151px;
         color: $headerColor;
         font-size: $headerFontSize;
         img {

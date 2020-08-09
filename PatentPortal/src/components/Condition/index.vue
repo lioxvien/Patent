@@ -32,7 +32,6 @@
                     url: '/getConditionList',
                     methods: 'get',
                 }).then(res=>{
-                    console.log(res)
                     if(res.code===0) {
                         this.conditionList=res.data;
                     }
@@ -40,7 +39,6 @@
             },
             chooseCondition(index,ite) {
                 this.$set(this.chooseConditionList, index, ite)
-                console.log(this.chooseConditionList)
             }
         },
         watch: {

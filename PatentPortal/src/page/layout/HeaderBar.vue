@@ -187,7 +187,7 @@
                 }
             },
             toLogin(type) {
-                this.$router.push({path:'/login'})
+                this.$router.push({path:'/login',query: type})
             },
             editPawSubmit(){
                 console.log('提交修改密码')
