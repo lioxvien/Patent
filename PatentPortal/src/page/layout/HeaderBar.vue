@@ -8,7 +8,7 @@
             <ul class="userInfo">
                 <li>
                     <el-dropdown @command="seeOrder">
-                        <span class="order" @click="myOrder">
+                        <span class="order">
                             我的订单
                             <i class="el-icon-caret-bottom el-icon--right"></i>
                         </span>
@@ -184,7 +184,8 @@
                 ]
             },
                 saleDialogVisible: false,
-                titleDialog: '发布出售'
+                titleDialog: '发布出售',
+                activeName: 'sale'
             }
         },
         computed: {
@@ -221,20 +222,8 @@
                 }
             },
             seeOrder(command) {
-                 switch(command) {
-                     case 'collection':
-                         console.log('我的收藏');
-                         break;
-                     case 'sale':
-                         this.$router.push('/myOrder')
-                         break;
-                     case 'buy':
-                         this.$router.push('/myOrder')
-                         break;
-                     case 'paid':
-                         console.log('已支付');
-                         break;
-                }
+                this.$store.commit('toggleMyOrderTab',command)
+                this.$router.push('/myOrder')
             },
             toLogin(type) {
                 this.$router.push({path:'/login',query: type})
@@ -244,11 +233,7 @@
                 this.dialog[value].show = false;
             },
             toPage(path) {
-                console.log('积分商城');
                 this.$router.push({path: path})
-            },
-            myOrder() {
-                console.log('我的订单');
             },
             release(type) { // 发布按钮  0 出售 1 求购
                 this.saleDialogVisible = true;
@@ -257,7 +242,8 @@
             closeSaleDialog(value) {
                 this.saleDialogVisible = value;
 
-            }
+            },
+
         }
     }
 </script>

@@ -7,7 +7,7 @@
             <el-tab-pane label="我的求购" name="buy">
                 <SaleBuy :info="activeName" :type="'my'"></SaleBuy>
             </el-tab-pane>
-            <el-tab-pane label="我的收藏" name="colloction">
+            <el-tab-pane label="我的收藏" name="collection">
                 我的收藏
             </el-tab-pane>
         </el-tabs>
@@ -24,13 +24,18 @@
       components: { SideButton,SaleBuy },
       data() {
           return {
-              activeName: 'sale',
+              activeName: this.$store.state.activeName,
           }
       },
       methods: {
           toggleTab(tab) {
-              this.activeName = tab.name;
+              this.$store.commit('toggleMyOrderTab',tab.name)
           },
+      },
+      watch: {
+          '$store.state.activeName': function (newValue) {
+                this.activeName = newValue;
+          }
       }
   }
 </script>

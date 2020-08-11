@@ -5,7 +5,6 @@ const whiteList = [
     '/notice',
     '/maintenance',
     '/home',
-    '/pointsMall'
 ]
 
 export default whiteList

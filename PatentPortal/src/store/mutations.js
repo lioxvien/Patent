@@ -22,4 +22,7 @@ export default {
   // setThemeColor(state, data){
   //   state.theme = data
   // }
+    toggleMyOrderTab (state,data) {
+      state.activeName = data;
+    }
 }
