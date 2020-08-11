@@ -1,0 +1,162 @@
+﻿.Logindiv{
+	width: 100%;
+	height: 525px;
+	background-color: #ff8d6a;
+}
+.logindiv{
+	width: 1200px;
+	height: 460px;
+	margin: 0 auto;
+	padding: 25px 0px;  
+}
+.logindivL{
+	width: 740px;
+	height: 430px;
+	float: left;
+	background: url(../../img/login/pic.png) no-repeat;
+}
+.logindivR{
+	width: 340px;
+	height: 460px;
+	float: left;
+	box-shadow: 1px 1px 12px #ccc;
+	background-color: #fff;
+}
+.logindivRtop{
+	width: 340px;
+	height: 49px;
+	float: left;
+	font-size: 14pt;
+	color: #25c6fc;
+	font-weight: 600;
+	text-align: center;
+	line-height: 50px;
+	border-bottom: 1px solid #f4f4f4;
+}
+.logindivRtxt{
+	width: 290px;
+	height: 355px;
+	padding: 13px 25px 15px 25px;
+	float: left;
+}
+.logindivRbot{
+	width: 290px;
+	height: 49px;
+	background-color: #fcfcfc;
+	float: left;
+	border-top: 1px solid #f4f4f4;
+	padding: 0px 25px;
+}
+.logindivRn{
+	height: 38px;
+	border: 1px solid #bdbdbd;
+	float: left;
+}
+.logindivRna{
+	width: 288px;
+}
+.logindivRnb{
+	width: 182px;
+}
+.loginnamep{
+	width: 43px;
+	height: 38px;
+	border-right: 1px solid #bdbdbd;
+	display: inline-block;
+	float: left;
+}
+.loginnamepa{
+	background: url(../../img/login/登录.png) no-repeat #f3f3f3 12px 11px;
+}
+.loginnamepb{
+	background: url(../../img/login/密码.png) no-repeat #f3f3f3 14px 10px;
+}
+.loginnamepc{
+	background: url(../../img/login/验证码.png) no-repeat #f3f3f3 13px 11px;
+}
+.loginname{
+	height: 38px;
+	float: left;
+	border: none;
+	font-size: 11pt;
+	color: #999999;
+	text-indent: 1em;
+}
+.loginnamea{
+	width: 138px;
+}
+.loginnameb{
+	width: 243px;
+}
+.loginpass{
+	margin: 13px 0px;
+}
+.loginbutton{
+	width: 290px;
+	height: 36px;
+	background-color: #25c6fc;
+	outline: none;
+	border: none;
+    font-size: 14pt;
+    color: #fff;
+    letter-spacing: 1em;
+    text-align: center;
+    line-height: 36px;
+    cursor: pointer;
+    padding-left: 26px;
+}
+.loginY{
+	width: 88px;
+	height: 38px;
+	border: 1px solid #bdbdbd;
+	float: right;
+	display: inline-block;
+	font-size: 11pt;
+	color: #999999;
+	text-align: center;
+	line-height: 38px;
+	cursor: pointer;
+}
+.logindivRnS{
+	width: 290px;
+	height: 40px;
+    float:left;
+}
+.logindivRbota{
+	width: auto;
+	height: 49px;
+	font-size: 10pt;
+	display: inline-block;
+	line-height: 49px;
+	cursor: pointer;
+}
+.logindivRbotb{
+	float: left;
+	color: #666666;
+}
+.logindivRbotc{
+	float: right;
+	text-align: right;
+	color: #25c6fc;
+}
+.logindivRbotd{
+	width: 20px;
+	height: 50px;
+	background: url(../../img/login/左箭头.png) no-repeat;
+	display: inline-block;
+	float: right;
+}
+input{
+	outline: none;
+}
+.mb13{
+    margin-bottom:13px;
+}
+.coderight{
+    border: none;
+    width: 31%;
+    height: 100%;
+    color: white;
+    font-size: 10pt;
+    background-color: #1abb78;
+}

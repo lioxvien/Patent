@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuanGua.PatentBus.Model", "ZuanGua.PatentBus.Model\ZuanGua.PatentBus.Model.csproj", "{055B9973-9019-4095-BDC4-2098D9590A11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuanGua.PatentBus.BLL", "ZuanGua.PatentBus.BLL\ZuanGua.PatentBus.BLL.csproj", "{350E446F-79DB-4FAE-B834-E31A5B70755E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuanGua.PatentBus.Common", "ZuanGua.PatentBus.Common\ZuanGua.PatentBus.Common.csproj", "{EDDB203E-4B62-4504-8786-769B56E89A6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuanGua.PatentBus.UI.Portal", "ZuanGua.PatentBus.UI.Portal\ZuanGua.PatentBus.UI.Portal.csproj", "{4008C487-55F3-406C-9328-8BAABC5A6F80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZuanGua.PatentBus.DAL", "ZuanGua.PatentBus.DAL\ZuanGua.PatentBus.DAL.csproj", "{342F45C7-25E1-4B80-B3B1-E12F4F8DCDA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{055B9973-9019-4095-BDC4-2098D9590A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055B9973-9019-4095-BDC4-2098D9590A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055B9973-9019-4095-BDC4-2098D9590A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055B9973-9019-4095-BDC4-2098D9590A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{350E446F-79DB-4FAE-B834-E31A5B70755E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{350E446F-79DB-4FAE-B834-E31A5B70755E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{350E446F-79DB-4FAE-B834-E31A5B70755E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{350E446F-79DB-4FAE-B834-E31A5B70755E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDDB203E-4B62-4504-8786-769B56E89A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDDB203E-4B62-4504-8786-769B56E89A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDDB203E-4B62-4504-8786-769B56E89A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDDB203E-4B62-4504-8786-769B56E89A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4008C487-55F3-406C-9328-8BAABC5A6F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4008C487-55F3-406C-9328-8BAABC5A6F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4008C487-55F3-406C-9328-8BAABC5A6F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4008C487-55F3-406C-9328-8BAABC5A6F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342F45C7-25E1-4B80-B3B1-E12F4F8DCDA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342F45C7-25E1-4B80-B3B1-E12F4F8DCDA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342F45C7-25E1-4B80-B3B1-E12F4F8DCDA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342F45C7-25E1-4B80-B3B1-E12F4F8DCDA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

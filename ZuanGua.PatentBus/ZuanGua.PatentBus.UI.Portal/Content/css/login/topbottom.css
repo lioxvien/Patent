@@ -1,0 +1,85 @@
+﻿*{
+	margin: 0;
+	padding: 0;
+    font-family: 'Microsoft YaHei',"微软雅黑";
+}
+.headerdiv{
+	height: 100px;
+	box-shadow: 0px 5px 15px #ccc;
+}
+.header{
+	width: 1170px;
+	height: 100px;
+	margin: 0 auto;
+}
+.LOGO{
+	width: 13%;
+	height: 80%;
+	float: left;
+}
+.LOGO img{
+	width: 100%;
+	height: 100%;
+	margin-top: 4%;
+}
+.textleft{
+	height: 30px;
+	float: left;
+	font-size: 16pt;
+	line-height: 30px;
+	display: inline-block;
+	margin-top: 44px;
+	margin-left: 10px;
+}
+.textright{
+	height: 30px;
+	float: right;
+	font-size: 11pt;
+	line-height: 30px;
+	display: inline-block;
+	margin-top: 47px;
+	color: #9e9e9e;
+}
+/*footer*/
+.Bottom_Bot{
+	width: 100%;
+	height: 70px;
+	background-color: #ebebeb;
+}
+.Bottom_Bota{
+	width: 1170px;
+	height: 70px;
+	margin: 0 auto;
+}
+.Bottom_Botb{
+	width: 564px;
+	height: 70px;
+	margin: 0 auto;
+	/*padding: 0px 303px;*/
+}
+.Bottom_Botaa{
+	width: 64px;
+	height: 70px;
+	display: inline-block;
+	float: left;
+}
+.Bottom_Botab{
+	width: 500px;
+	height: 20px;
+	font-size: 10pt;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	cursor: default;
+	color: #3d3d3d;
+}
+.Bottom_Botabb{
+	width: 500px;
+	height: 20px;
+	font-size: 10pt;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	cursor: default;
+	color: #3d3d3d;
+}

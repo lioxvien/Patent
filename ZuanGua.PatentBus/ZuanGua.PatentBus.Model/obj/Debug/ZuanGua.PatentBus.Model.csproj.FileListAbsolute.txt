@@ -1,0 +1,11 @@
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\ZuanGua.PatentBus.Model.dll.config
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\ZuanGua.PatentBus.Model.dll
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\ZuanGua.PatentBus.Model.pdb
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\EntityFramework.dll
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\EntityFramework.xml
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\obj\Debug\ZuanGua.PatentBus.Model.dll
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\obj\Debug\ZuanGua.PatentBus.Model.pdb
+D:\ProgramFiles\ZuanGua.PatentBus\ZuanGua.PatentBus.Model\obj\Debug\ZuanGua.PatentBus.Model.csprojResolveAssemblyReference.cache

@@ -1,0 +1,63 @@
+﻿@model ZuanGua.PatentBus.Model.SYS_USER
+
+@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<link href="~/Content/css/login/register.css?v=1.2" rel="stylesheet" />
+<script src="~/Scripts/Home/Register.js"></script>
+
+<div class="Logindiv">
+    <div class="logindiv">
+        <div class="logindivL"></div>
+        <div class="logindivR">
+            <div class="logindivRtop">用户注册</div>
+            <div class="logindivRtxt" id="logindiv">
+                <div style="text-align: center; color: red; margin-bottom: 5px;">
+                    <asp:Label ID="lblInfo" ></asp:Label>
+                </div>
+                <div class="logindivRn logindivRna">
+                    <span class="loginnamepa loginnamep"></span>
+                    <input class="loginname loginnameb" id="txtMobile"  placeholder="手机号" />
+                </div>
+                <div class="logindivRn loginpass logindivRna">
+                    <span class="loginnamepb loginnamep"></span>
+                    <input type="password" class="loginname loginnameb" id="txtPWD"  placeholder="密码" />
+                </div>
+                <div class="logindivRn logindivRna mb13">
+                    <span class="loginnamepb loginnamep"></span>
+                    <input type="password" class="loginname loginnameb" id="txtAgainPWD" placeholder="再次输入密码" />
+                </div>
+                <div class="logindivRnS mb13">
+                    <div class="logindivRn logindivRnb">
+                        <span class="loginnamepc loginnamep"></span>
+                        <input class="loginname loginnamea" id="txtYZM"  placeholder="点击输入验证码" />
+                    </div>
+                    <img id="ImgYZM" alt="" src="/Home/IdentifyCode" class="loginY" onclick="ChangeYZM()" />
+                </div>
+                <div class="logindivRnS mb13">
+                    <div class="logindivRn logindivRnb">
+                        <span class="loginnamepc loginnamep"></span>
+                        <input class="loginname loginnamea" id="txtMobileYZM" placeholder="获取短信验证码" />
+                    </div>
+                    <button class="coderight fr cp" style="border: none;" id="btnGet">获取验证码</button>
+                    @*<img id="ImgDXYZM" alt="" src="/Member/Login/IdentifyCode.aspx?type=login" class="loginY" onclick="ChangeYZM()" />*@
+                </div>
+                <div class="logindivRn logindivRna mb13">
+                    <span class="loginnamepa loginnamep"></span>
+                    <input class="loginname loginnameb" id="txtInviteCode" placeholder="邀请码" />
+                </div>
+                <input type="button" class="loginbutton" value="注册" onclick="if (!checkInfo()) return false" />
+            </div>
+            <div class="logindivRbot">
+                <span class="logindivRbota logindivRbotc"><span style="color:#333;cursor:default">已有账号？</span><a href="/Home/Login" style="color:#25c6fc">立即登录</a></span>
+                @*<span class="logindivRbotd"></span>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div>
+    @Html.ActionLink("返回首页", "Index")
+</div>*@

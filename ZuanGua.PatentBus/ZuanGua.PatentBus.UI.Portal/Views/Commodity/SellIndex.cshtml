@@ -1,0 +1,326 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>商品列表</title>
+    <link href="~/Scripts/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-confirm.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <table class="layui-hide" id="CommidityList" lay-filter="test"></table>
+
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="addInfo">增加</button>
+            <button class="layui-btn layui-btn-sm" lay-event="Refresh">刷新</button>
+            <button class="layui-btn layui-btn-sm" lay-event="deleteInfo">删除</button>
+            @*<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>*@
+        </div>
+    </script>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+    <script src="~/Scripts/layui/layui.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            //if (getQueryVariable("res") == "1") {
+            //    layer.alert("不能重复发布同一授权号的商品");
+            //} else if (getQueryVariable("res") == "2") {
+            //    layer.alert("添加成功");
+            //}
+
+            table.render({
+                elem: '#CommidityList',
+                url: '/Commodity/GetMySellList',
+                toolbar: '#toolbarDemo', //开启头部工具栏，并为其绑定左侧模板
+                defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                    title: '提示',
+                    layEvent: 'LAYTABLE_TIPS',
+                    icon: 'layui-icon-tips'
+                }],
+                title: '出售商品表',
+                cols: [[
+                    { type: 'checkbox', fixed: 'left' },
+                    //{ field: 'id', title: 'ID', width: 80, fixed: 'left', unresize: true, sort: true },
+                    { field: 'AuthorizationNumber', title: '授权号', width: 150, sort: true },  //edit: 'text'  文本框编辑
+                    //{
+                    //    field: 'email', title: '邮箱', width: 150, edit: 'text', templet: function (res) {
+                    //        return '<em>' + res.email + '</em>'
+                    //    }
+                    //},
+                    { field: 'CommodityType', title: '商品类型', width: 120, sort: true },
+                    { field: 'CommodityName', title: '商品名称' },
+                    { field: 'CommodityField', title: '商品领域',width:120 },
+                    { field: 'SalePrice', title: '出售价格', width: 120, sort: true },
+                    { field: 'CommodityState', title: '商品状态', width: 120 },
+                    {
+                        field: 'CreateTime', title: '发布日期',width:120, sort: true, templet: function (res) {
+                            return getFormatDate(res.CreateTime)
+                        }
+                    },
+                    { field: 'LinkMobile', title: '联系电话', width: 120, sort: true },
+                    { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+                ]],
+                page: true,
+                parseData: function (res) {
+                    console.log(res);
+                    return {
+                        "code": 0,
+                        "msg": "",
+                        "count": res.length,
+                        "data":res
+                    }
+                }
+            });
+
+            //头工具栏事件
+            table.on('toolbar(test)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id);
+                console.log(checkStatus);
+                switch (obj.event) {
+                    case 'addInfo':
+                        showAddInfo();
+                        break;
+                    case 'Refresh':
+                        refresh();
+                        break;
+                    case 'deleteInfo':
+                        var data = checkStatus.data;
+                        if (data.length > 0) {
+                            layer.confirm('真的删除行么', function (index) {
+                                $.ajax({
+                                    url: "/Commodity/DeleteBatch",
+                                    type: "post",
+                                    data: { "models": data },
+                                    success: function () {
+                                        layer.close(index);
+                                        refresh();
+                                    }
+                                })
+                            });
+                        } else {
+                            layer.alert("请至少选择一项进行删除");
+                        }
+                        break;
+                    case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                        break;
+                    case 'getCheckLength':
+                        var data = checkStatus.data;
+                        layer.msg('选中了：'+ data.length + ' 个');
+                        break;
+                    case 'isAll':
+                        layer.msg(checkStatus.isAll ? '全选': '未全选');
+                        break;
+
+                        //自定义头工具栏右侧图标 - 提示
+                    case 'LAYTABLE_TIPS':
+                        layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                        break;
+                };
+            });
+
+            //监听行工具事件
+            table.on('tool(test)', function(obj){
+                var data = obj.data;
+                console.log(obj)
+                if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        $.ajax({
+                            url: "/Commodity/DeleteInfo",
+                            type: "post",
+                            data: { "id": obj.data.CommodityID },
+                            success: function () {
+                                layer.close(index);
+                                refresh();
+                            }
+                        })
+                    });
+                } else if(obj.event === 'edit'){
+                    layer.prompt({
+                        formType: 2
+                      ,value: data.email
+                    }, function(value, index){
+                        obj.update({
+                            email: value
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+        })
+
+        function showAddInfo() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                var form = layui.form;
+
+                layer.open({
+                    title: "添加专利信息",
+                    content: $("#PatentInfo").html(),
+                    area: ['500px', '510px'],
+                    type: 1,
+                    success: function () {
+                        form.render();
+                    },
+                    yes:function(){
+                        layui.use('form', function () {
+                            //监听提交
+                            form.on('submit(formDemo)', function (data) {
+                                return false;
+                                $.ajax({
+                                    url: '/Commodity/AddInfo',
+                                    method:'post',       
+                                    data: { 'model': data.field },
+                                    dataType:'JSON',         
+                                    success: function (res) {
+                                        var item = '${param.res}';
+                                        if (item == '0') {
+                                            parent.closeIframe(res);
+                                            layer.alert("不能重复发布同一授权号的商品");
+                                        }
+                                        else            
+                                            layer.alert("添加成功");   
+                                    },              
+                                    error:function (data) {
+                        
+                                    }           
+                                }) ;    
+                                //layer.msg(JSON.stringify(data.field));
+                            });
+                        });
+                    }
+                })
+            })
+        }
+
+        function getFormatDate(date) {
+            var seperator1 = "-";
+            var year = new Date(date).getFullYear();
+            var month = new Date(date).getMonth() + 1;
+            var strDate = new Date(date).getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+
+        function refresh() {
+            $(".layui-laypage-btn").click();
+        }
+
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+    </script>
+
+    <script type="text/html" id="PatentInfo">
+        <form class="layui-form" action="AddInfo" method="post" style="margin-top:20px;">
+            <div class="layui-form-item">
+                <label class="layui-form-label">授权号</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <input type="text" name="authorizationNumber" required lay-verify="required" placeholder="请输入授权号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品类型</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <select name="commodityType" lay-verify="required" id="commodityType">
+                        <option value="发明专利">发明专利</option>
+                        <option value="实用新型专利">实用新型专利</option>
+                        <option value="商标">商标</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品领域</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <select name="commodityField" lay-verify="required" id="commodityField" size="6">
+                        <option value="农业">农业</option>
+                        <option value="机械">机械</option>
+                        <option value="汽车">汽车</option>
+                        <option value="园林">园林</option>
+                        <option value="医疗">医疗</option>
+                        <option value="家居">家居</option>
+                        <option value="建筑">建筑</option>
+                        <option value="环保">环保</option>
+                        <option value="机器人">机器人</option>
+                        <option value="教学">教学</option>
+                        <option value="市政">市政</option>
+                        <option value="农业机械">农业机械</option>
+                        <option value="医疗器械">医疗器械</option>
+                        <option value="畜牧业">畜牧业</option>
+                        <option value="乐器">乐器</option>
+                        <option value="体育">体育</option>
+                        <option value="智能机器人">智能机器人</option>
+                        <option value="服装加工">服装加工</option>
+                        <option value="垃圾处理">垃圾处理</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品名称</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <input type="text" name="commodityName" required lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">出售价格</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <input type="text" name="salePrice" required lay-verify="required|number" placeholder="请输入出售价格" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品状态</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <select name="commodityState" lay-verify="required" id="commodityState">
+                        <option value="授权下证书">授权下证书</option>
+                        <option value="授权未缴费">授权未缴费</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">联系电话</label>
+                <div class="layui-input-block" style="width: 66%;">
+                    <input type="text" name="linkMobile" required lay-verify="required|phone" placeholder="请输入联系电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left:60%;">
+                    <button class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </script>
+</body>
+</html>

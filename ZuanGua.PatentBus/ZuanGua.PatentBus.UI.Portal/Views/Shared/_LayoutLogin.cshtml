@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.title - 专利交易平台</title>
+    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/css/base.css" rel="stylesheet" />
+    <link href="~/Content/css/login/topbottom.css" rel="stylesheet" />
+    <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/layer/skin/default/layer.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/toastr/toastr.min.js"></script>
+    <script src="~/Scripts/Common/AlertInfo.js"></script>
+    <script src="~/Content/Plugins/layer/layer.js"></script>
+</head>
+<body>
+    <!--header-->
+    <div class="headerdiv shadow">
+        <div class="header clearfix">
+            <div class="LOGO fl cp">
+                <a href="/Home/Index"><img style="width:100%;height:100%;" src="~/Content/img/logo.png" /></a>
+            </div>
+            @{string wel = "欢迎" + ViewBag.title;}
+            <span class="textleft fl inlineblock ml15">@wel</span>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <!--footer-->
+    <div class="Bottom_Bot">
+        <div class="Bottom_Bota clearfix">
+            <div class="Bottom_Botb">
+                <span class="Bottom_Botab inlineblock tc fl mt15 cd">津ICP备09000137号 建议使用IE8及以上版本  </span>
+                <span class="Bottom_Botab inlineblock tc fl mt5 cd">版权所有©天津创通票 技术支持：政和科技股份有限公司| 创通票科技有限公司</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
