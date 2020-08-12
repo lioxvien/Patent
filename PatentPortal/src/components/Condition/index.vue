@@ -50,7 +50,5 @@
     }
 </script>
 <style>
-    .s-canvas {
-        display: inline-block;
-    }
+
 </style>

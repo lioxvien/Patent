@@ -122,12 +122,13 @@
 <style>
     .turntable {
         position: relative;
+        width: 700px;
     }
     .turntable-top {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-91%,-70%);
+        transform: translate(-50%,-70%);
         width: 218px;
         height: 383px;
     }

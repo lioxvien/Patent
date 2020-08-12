@@ -13,7 +13,12 @@
         padding-right: 8%;
         h1.logo {
             width: 40%;
-            text-align: center;
+            height: $headerHeight;
+            padding: 20px 0 20px 18%;
+            box-sizing: border-box;
+            img {
+                height: 100%;
+            }
         }
         .el-row {
             flex: 1;
@@ -34,7 +39,6 @@
     }
     .login-area {
         width: 300px;
-        height: 360px;
         float: right;
         margin-top: 5%;
         margin-right: 8%;
@@ -47,6 +51,10 @@
             img {
                 width: 160px;
             }
+        }
+        .register {
+            text-align: right;
+            padding-right: 20px;
         }
     }
 
