@@ -11,7 +11,7 @@ var data={
             "sale": 100,
             "saleRate": '33.33%',
             "allBuy": parseInt(Math.random()*200),
-            "createTime": "2019-08-09 10:00:00"
+            "registerTime": "2019-08-09 10:00:00"
         }, {
             "id": 1,
             "phone": "1234567890123",
@@ -19,7 +19,7 @@ var data={
             "sale": parseInt(Math.random()*200),
             "saleRate": '33.33%',
             "allBuy": parseInt(Math.random()*200),
-            "createTime": "2019-08-09 10:00:00"
+            "registerTime": "2019-08-09 10:00:00"
         }, {
             "id": 1,
             "phone": "1234567890123",
@@ -27,7 +27,7 @@ var data={
             "sale": parseInt(Math.random()*200),
             "saleRate": '33.33%',
             "allBuy": parseInt(Math.random()*200),
-            "createTime": "2019-08-09 10:00:00"
+            "registerTime": "2019-08-09 10:00:00"
         }, {
             "id": 1,
             "phone": "1234567890123",
@@ -35,7 +35,7 @@ var data={
             "sale": parseInt(Math.random()*200),
             "saleRate": '33.33%',
             "allBuy": parseInt(Math.random()*200),
-            "createTime": "2019-08-09 10:00:00"
+            "registerTime": "2019-08-09 10:00:00"
         },  {
             "id": 1,
             "phone": "1234567890123",
@@ -43,7 +43,7 @@ var data={
             "sale": parseInt(Math.random()*200),
             "saleRate": '33.33%',
             "allBuy": parseInt(Math.random()*200),
-            "createTime": "2019-08-09 10:00:00"
+            "registerTime": "2019-08-09 10:00:00"
         },  {
             "id": 1,
             "phone": "1234567890123",
@@ -51,7 +51,7 @@ var data={
             "sale": parseInt(Math.random()*200),
             "saleRate": '33.33%',
             "allBuy": parseInt(Math.random()*200),
-            "createTime": "2019-08-09 10:00:00"
+            "registerTime": "2019-08-09 10:00:00"
         }]
     }
 }

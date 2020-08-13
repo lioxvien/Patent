@@ -21,10 +21,10 @@
                 <el-table ref="multipleTable" :data="tableData.body" tooltip-effect="dark" border
                           :row-class-name="tableRowClassName"
                           style="width: 100%;margin-bottom: 20px;">
-                    <el-table-column type="selection" width="64" align="center"></el-table-column>
+                    <el-table-column type="selection" align="center"></el-table-column>
                     <el-table-column type="index" label="序号" width="64" align="center"></el-table-column>
-                    <el-table-column prop="phone" label="手机号" align="center" min-width="140"></el-table-column>
-                    <el-table-column prop="allSale" label="发布出售商品数" :show-overflow-tooltip="true" align="center" min-width="140"></el-table-column>
+                    <el-table-column prop="phone" label="手机号" align="center"></el-table-column>
+                    <el-table-column prop="allSale" label="发布出售商品数" :show-overflow-tooltip="true" align="center"></el-table-column>
                     <el-table-column prop="sale" label="出售数" align="center"></el-table-column>
                     <el-table-column prop="saleRate" label="出售率" align="center"></el-table-column>
                     <el-table-column prop="allBuy" label="发布求购商品数" align="center"></el-table-column>

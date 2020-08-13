@@ -5,7 +5,9 @@
                 <app-search>
                     <el-form :inline="true" :model="selectForm" ref="selectForm" size='mini'>
                         <el-form-item label="审核状态" size='small'>
-                            <el-input v-model="selectForm.phone" placeholder="请选择审核状态"></el-input>
+                            <el-select v-model="selectForm.phone" placeholder="请选择审核状态">
+                                <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
+                            </el-select>
                         </el-form-item>
                         <el-form-item label="授权号" size='small'>
                             <el-input v-model="selectForm.phone" placeholder="请输入授权号"></el-input>
@@ -14,39 +16,39 @@
                             <el-input v-model="selectForm.phone" placeholder="请输入商品名称"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="success" icon="el-icon-search" @click="getList">查询</el-button>
-                            <el-button type="success" icon="el-icon-search" @click="getList">重置</el-button>
+                            <el-button type="primary" icon="el-icon-search" @click="getList">查询</el-button>
+                            <el-button type="warning" icon="el-icon-refresh" @click="getList">重置</el-button>
                         </el-form-item>
                     </el-form>
                 </app-search>
                 <!-- 工具条 -->
                 <app-toolbar>
-                    <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="disableUser">下架</el-button>
+                    <el-button size="small" type="danger" icon="el-icon-document-delete" class="toolBarBtn" @click="disableUser">下架</el-button>
                     <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="exportOrderReport">导出</el-button>
                 </app-toolbar>
                 <!-- 表格 -->
                 <el-table ref="multipleTable" :data="tableData.body" tooltip-effect="dark" border
                           :row-class-name="tableRowClassName"
                           style="width: 100%;margin-bottom: 20px;">
-                    <el-table-column type="selection" width="64" align="center"></el-table-column>
-                    <el-table-column type="index" label="序号" width="64" align="center"></el-table-column>
-                    <el-table-column prop="phone" label="授权号" align="center" min-width="140"></el-table-column>
-                    <el-table-column prop="allSale" label="商品类型" :show-overflow-tooltip="true" align="center" min-width="140"></el-table-column>
+                    <el-table-column type="selection" align="center"></el-table-column>
+                    <el-table-column type="index" width="64" label="序号" align="center"></el-table-column>
+                    <el-table-column prop="phone" label="授权号" :show-overflow-tooltip="true"  align="center"></el-table-column>
+                    <el-table-column prop="allSale" label="商品类型" :show-overflow-tooltip="true" align="center"></el-table-column>
                     <el-table-column prop="sale" label="商品名称" align="center"></el-table-column>
                     <el-table-column prop="sale" label="出售价格" align="center"></el-table-column>
                     <el-table-column prop="sale" label="商品状态" align="center"></el-table-column>
                     <el-table-column prop="sale" label="发布日期" align="center"></el-table-column>
                     <el-table-column prop="sale" label="联系电话" align="center"></el-table-column>
                     <el-table-column prop="saleRate" label="审核状态" align="center"></el-table-column>
-                    <el-table-column label="操作" width="200" align="center">
+                    <el-table-column label="操作" width="270" align="center">
                         <template slot-scope="scope">
-                            <el-button round type="primary" icon="el-icon-edit" size="mini"
+                            <el-button round type="warning" icon="el-icon-more" size="mini"
                                        @click.stop="editGroup(scope.row)">审核
                             </el-button>
-                            <el-button round type="primary" icon="el-icon-edit" size="mini"
+                            <el-button round type="danger" icon="el-icon-document-delete" size="mini"
                                        @click.stop="editGroup(scope.row)">下架
                             </el-button>
-                            <el-button round type="danger" icon="el-icon-delete" size="mini"
+                            <el-button round type="success" icon="el-icon-paperclip" size="mini"
                                        @click.stop="removeOne(scope.row.groupName)">置顶
                             </el-button>
                         </template>
@@ -54,7 +56,7 @@
                 </el-table>
                 <el-pagination class="sys-fy" layout="total, sizes, prev, pager, next, jumper"
                                :total="tableData.tableSize" :paginationTotal="tableData.tableSize"
-                               @size-change="tableSizeChange" @current-change="pageChange">
+                               :page-sizes="[10,20,50,100]" @size-change="tableSizeChange" @current-change="pageChange">
                 </el-pagination>
             </app-section>
         </div>
@@ -86,7 +88,7 @@
     import AppToolbar from "../../components/AppToolbar/index";
     export default {
         components: {AppSection, AppSearch, AppToolbar},
-        name: 'sale',
+        name: 'buy',
         data() {
             return {
                 selectForm: {
@@ -101,7 +103,18 @@
                 },
                 formLabelWidth: "120px",
                 title: '用户',
-                disableUserDialog: false
+                disableUserDialog: false,
+                options: [
+                    {
+                        label: '审核中',
+                        value: 1
+                    }, {
+                        label: '审核通过',
+                        value: 2
+                    },{
+                        label: '审核失败',
+                        value: 3
+                    }],
             }
         },
         mounted() {

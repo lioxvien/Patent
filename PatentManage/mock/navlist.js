@@ -104,14 +104,14 @@ var data ={
             "sort":1,
         },
         {
-            "name": "求购商品",
-            "path": "/buy",
+            "name": "出售商品",
+            "path": "/sale",
             "id":2,
             "sort":2,
         },
         {
-            "name": "出售商品",
-            "path": "/sale",
+            "name": "求购商品",
+            "path": "/buy",
             "id":3,
             "sort":3,
         },
