@@ -1,75 +1,44 @@
 <template>
     <div class="sys-page">
         <div class="page-content">
-            <app-section title="用户">
+            <app-section title="用户管理">
                 <app-search>
                     <el-form :inline="true" :model="selectForm" ref="selectForm" size='mini'>
-                        <el-form-item label="工作组名称" size='mini'>
-                            <el-input v-model="selectForm.groupName" placeholder="请输入用户"></el-input>
-                        </el-form-item>
-                        <el-form-item label="工作组成立时间">
-                            <el-date-picker
-                                v-model="selectForm.time"
-                                type="daterange"
-                                range-separator="至"
-                                value-format="yyyy-MM-dd"
-                                start-placeholder="开始日期"
-                                end-placeholder="结束日期">
-                            </el-date-picker>
-                        </el-form-item>
-                        <el-form-item label="最后发言时间">
-                            <el-date-picker
-                                v-model="selectForm.groupLastSpeechtime"
-                                type="daterange"
-                                range-separator="至"
-                                value-format="yyyy-MM-dd"
-                                start-placeholder="开始日期"
-                                end-placeholder="结束日期">
-                            </el-date-picker>
+                        <el-form-item label="手机号" size='small'>
+                            <el-input v-model="selectForm.phone" placeholder="请输入手机号"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="success" icon="el-icon-search" @click="getList">搜索</el-button>
-                            <el-button type="warning" icon="el-icon-refresh" @click="resetSearch">重置</el-button>
+                            <el-button type="success" icon="el-icon-search" @click="getList">查询</el-button>
                         </el-form-item>
                     </el-form>
                 </app-search>
                 <!-- 工具条 -->
                 <app-toolbar>
-                    <el-button size="mini" type="warning" icon="el-icon-download" class="toolBarBtn" @click="exportOrderReport">导出</el-button>
+                    <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="disableUser">禁用</el-button>
+                    <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="exportOrderReport">注销</el-button>
                 </app-toolbar>
                 <!-- 表格 -->
                 <el-table ref="multipleTable" :data="tableData.body" tooltip-effect="dark" border
                           :row-class-name="tableRowClassName"
                           style="width: 100%;margin-bottom: 20px;">
+                    <el-table-column type="selection" width="64" align="center"></el-table-column>
                     <el-table-column type="index" label="序号" width="64" align="center"></el-table-column>
-                    <el-table-column prop="groupName" label="工作组名称" align="center" min-width="140"></el-table-column>
-                    <el-table-column prop="commonConcern" label="组关注" :show-overflow-tooltip="true" align="center" min-width="140"></el-table-column>
-                    <el-table-column prop="activeGrade" label="活跃度" align="center"></el-table-column>
-                    <el-table-column prop="groupNum" label="工作组人数" align="center"></el-table-column>
-                    <el-table-column prop="groupMember" label="工作组成员" align="center">
-                        <template slot-scope="scope">
-                            <el-button round type="warning" plain icon="el-icon-user-solid" size="mini"
-                                       @click.stop="viewMembers(scope.row)">查看成员
-                            </el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="historicalNews" label="历史消息" align="center">
-                        <template slot-scope="scope">
-                            <el-button round type="warning" plain icon="el-icon-chat-dot-round" size="mini"
-                                       @click.stop="viewHistoryNews(scope.row)">查看历史消息
-                            </el-button>
-                        </template>
-                    </el-table-column>
-                    <el-table-column label="操作" width="200" align="center">
-                        <template slot-scope="scope">
-                            <el-button round type="primary" icon="el-icon-edit" size="mini"
-                                       @click.stop="editGroup(scope.row)">编辑
-                            </el-button>
-                            <el-button round type="danger" icon="el-icon-delete" size="mini"
-                                       @click.stop="removeOne(scope.row.groupName)">删除
-                            </el-button>
-                        </template>
-                    </el-table-column>
+                    <el-table-column prop="phone" label="手机号" align="center" min-width="140"></el-table-column>
+                    <el-table-column prop="allSale" label="发布出售商品数" :show-overflow-tooltip="true" align="center" min-width="140"></el-table-column>
+                    <el-table-column prop="sale" label="出售数" align="center"></el-table-column>
+                    <el-table-column prop="saleRate" label="出售率" align="center"></el-table-column>
+                    <el-table-column prop="allBuy" label="发布求购商品数" align="center"></el-table-column>
+                    <el-table-column prop="registerTime" label="注册时间" align="center"></el-table-column>
+<!--                    <el-table-column label="操作" width="200" align="center">-->
+<!--                        <template slot-scope="scope">-->
+<!--                            <el-button round type="primary" icon="el-icon-edit" size="mini"-->
+<!--                                       @click.stop="editGroup(scope.row)">编辑-->
+<!--                            </el-button>-->
+<!--                            <el-button round type="danger" icon="el-icon-delete" size="mini"-->
+<!--                                       @click.stop="removeOne(scope.row.groupName)">删除-->
+<!--                            </el-button>-->
+<!--                        </template>-->
+<!--                    </el-table-column>-->
                 </el-table>
                 <el-pagination class="sys-fy" layout="total, sizes, prev, pager, next, jumper"
                                :total="tableData.tableSize" :paginationTotal="tableData.tableSize"
@@ -77,6 +46,25 @@
                 </el-pagination>
             </app-section>
         </div>
+
+
+        <el-dialog
+            title="请选择禁用时间"
+            :visible.sync="disableUserDialog"
+            width="50%">
+            <el-date-picker
+                v-model="value1"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                style="margin-left: 20px">
+            </el-date-picker>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="disableUserDialog = false">取 消</el-button>
+                <el-button type="primary" @click="submitDisable">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -90,13 +78,7 @@
         data() {
             return {
                 selectForm: {
-                    groupName: '',
-                    // groupNum: '',
-                    time: '',
-                    groupLastSpeechtime: '',
-                    spokesman: '',
-                    message: '',
-                    spokesTime: ''
+                   phone: ''
                 },
                 tableData: {
                     tableSize: 0,
@@ -107,6 +89,7 @@
                 },
                 formLabelWidth: "120px",
                 title: '用户',
+                disableUserDialog: false
             }
         },
         mounted() {
@@ -118,7 +101,7 @@
                 return item.label.indexOf(query) > -1;
             },
             getList() {//获取页面数据
-                // let url = `/record/page?pageSize=${this.tableData.pageSize}&pageNumber=${this.tableData.currentPage}`;
+                let url = `/getUserGoodsList?pageSize=${this.tableData.pageSize}&pageNumber=${this.tableData.currentPage}`;
                 // let normName = this.selectForm.normName;
                 // let recordYear = this.selectForm.dataYear;
                 // let time = this.selectForm.time;
@@ -131,40 +114,17 @@
                 // if (time !== '') {
                 //     url = url + "&startTime=" + time[0] + "&endTime=" + time[1];
                 // }
-                // this.$axios.get(url).then(res => {
-                //     this.tableData.body = res.data.list;
-                //     this.tableData.tableSize = res.data.totalElements;
-                // })
-                let data = [
-                    {
-                        groupId: '01',
-                        groupName: '航线组',
-                        commonConcern: '国内航线',
-                        activeGrade: '活跃',
-                        groupNum: 130
-                    },
-                    {
-                        groupId: '02',
-                        groupName: '机场组',
-                        commonConcern: '大兴机场',
-                        activeGrade: '非常活跃',
-                        groupNum: 230
-                    }
-                ];
-                let data1 = [];
-                let groupName = this.selectForm.groupName;
-                let groupNum = this.selectForm.groupNum;
-                let time = this.selectForm.time;
-                if (time !== '') {
-                    // url = url + "&startTime=" + time[0] + "&endTime=" + time[1];
-                }
-                if (data1.length !== 0) {
-                    this.tableData.body = data1.slice((this.tableData.currentPage - 1) * this.tableData.pageSize, this.tableData.currentPage * this.tableData.pageSize);
-                    this.tableData.tableSize = data1.length;
-                    return;
-                }
-                this.tableData.body = data.slice((this.tableData.currentPage - 1) * this.tableData.pageSize,this.tableData.currentPage * this.tableData.pageSize);
-                this.tableData.tableSize = data.length;
+                console.log('getList')
+                this.$axios({
+                    methods: 'get',
+                    url:url
+                }).then(res => {
+                    console.log(res)
+                    this.tableData.body = res.data.list;
+                    this.tableData.tableSize = res.data.totalElements;
+                }).catch(err => {
+                    console.log(err)
+                })
             },
             tableRowClassName({row, rowIndex}) {//获取点击表格的索引
                 row.index = rowIndex;
@@ -205,9 +165,16 @@
                     });
                 });
             },
+            disableUser() {
+                this.disableUserDialog = true;
+            },
             exportOrderReport() {
                 console.log('导出工作组')
             },
+            submitDisable() {
+                console.log('提交禁用');
+                this.disableUserDialog = false;
+            }
         }
     }
 </script>

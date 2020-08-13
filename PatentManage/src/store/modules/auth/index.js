@@ -32,7 +32,6 @@ const actions = {
     // 邮箱登录
     loginByEmail({ commit }, userInfo) {
         return new Promise((resolve) => {
-            console.log('发送登录请求');
             axios({
                 url: '/user/login',
                 method: 'post',
@@ -41,9 +40,8 @@ const actions = {
                     "password":userInfo.password
                 }
             }).then(res => {
-                console.log('发送登录请求成功')
                 if(res.code===0){
-                    console.log('登录成功')
+                    console.log(res)
                     commit('setToken', res.token);
                     commit('user/setName', res.name, { root: true });
                 }else{
@@ -69,7 +67,7 @@ const actions = {
     relogin({dispatch, commit, state}){
         return new Promise((resolve) => {
             // 根据Token进行重新登录
-            let token = Cookies.get('token'),
+            let token = Cookies.get('patent-manage-token'),
                 userName = Cookies.get('userName');
 
             // 重新登录时校验Token是否存在，跳转到login页面

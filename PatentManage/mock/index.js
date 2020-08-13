@@ -4,6 +4,7 @@ import login from './login'
 import navlist from './navlist'
 import getRoleList from './roleList'
 import userList from './userList'
+import userGoodsList from './userGoodsList'
 import Vue from 'vue'
 
 
@@ -15,4 +16,5 @@ console.log('data',data)
 // });
 Mock.mock(/\/user\/login/, login[0].data)
 Mock.mock(/\/auth\/getNavList/, navlist[0].data)
+Mock.mock(/\/getUserGoodsList/, userGoodsList[0].data)
 export default Mock
