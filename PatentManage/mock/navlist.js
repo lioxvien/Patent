@@ -106,20 +106,25 @@ var data ={
         {
             "name": "求购商品",
             "path": "/buy",
-            "id":5,
-            "sort":5,
+            "id":2,
+            "sort":2,
         },
         {
             "name": "出售商品",
             "path": "/sale",
-            "id":8,
-            "sort":8,
+            "id":3,
+            "sort":3,
         },
         {
             "path": "/complaintReview",
             "name": "投诉审核",
-            "id":9,
-            "sort":9,
+            "id":4,
+            "sort":4,
+        }, {
+            "path": "/exchange",
+            "name": "兑换记录",
+            "id":5,
+            "sort":5,
         }
     ]
 };

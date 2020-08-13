@@ -1,53 +1,48 @@
 <template>
     <div class="sys-page">
         <div class="page-content">
-            <app-section title="求购商品">
+            <app-section title="出售商品">
                 <app-search>
                     <el-form :inline="true" :model="selectForm" ref="selectForm" size='mini'>
-                        <el-form-item label="审核状态" size='small'>
-                            <el-input v-model="selectForm.phone" placeholder="请选择审核状态"></el-input>
+                        <el-form-item label="手机号" size='small'>
+                            <el-input v-model="selectForm.phone" placeholder="请输入手机号"></el-input>
                         </el-form-item>
-                        <el-form-item label="授权号" size='small'>
-                            <el-input v-model="selectForm.phone" placeholder="请输入授权号"></el-input>
+                        <el-form-item label="中奖/兑换项目" size='small'>
+                            <el-select v-model="selectForm.phone" placeholder="请选择中奖/兑换项目">
+                                <el-option v-for="item in itemOptions" :label="item.label" :value="item.value"></el-option>
+                            </el-select>
                         </el-form-item>
-                        <el-form-item label="商品名称" size='small'>
-                            <el-input v-model="selectForm.phone" placeholder="请输入商品名称"></el-input>
+                        <el-form-item label="状态" size='small'>
+                            <el-select v-model="selectForm.phone" placeholder="请选择状态">
+                                <el-option v-for="item in statusOptions" :label="item.label" :value="item.value"></el-option>
+                            </el-select>
                         </el-form-item>
                         <el-form-item>
-                            <el-button type="success" icon="el-icon-search" @click="getList">查询</el-button>
-                            <el-button type="success" icon="el-icon-search" @click="getList">重置</el-button>
+                            <el-button type="primary" icon="el-icon-search" @click="getList">查询</el-button>
+                            <el-button type="warning" icon="el-icon-refresh" @click="getList">重置</el-button>
                         </el-form-item>
                     </el-form>
                 </app-search>
                 <!-- 工具条 -->
-                <app-toolbar>
-                    <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="disableUser">下架</el-button>
-                    <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="exportOrderReport">导出</el-button>
-                </app-toolbar>
+<!--                <app-toolbar>-->
+<!--                    <el-button size="small" type="danger" icon="el-icon-document-delete" class="toolBarBtn" @click="disableUser">下架</el-button>-->
+<!--                    <el-button size="small" type="warning" icon="el-icon-download" class="toolBarBtn" @click="exportOrderReport">导出</el-button>-->
+<!--                </app-toolbar>-->
                 <!-- 表格 -->
                 <el-table ref="multipleTable" :data="tableData.body" tooltip-effect="dark" border
                           :row-class-name="tableRowClassName"
                           style="width: 100%;margin-bottom: 20px;">
-                    <el-table-column type="selection" width="64" align="center"></el-table-column>
-                    <el-table-column type="index" label="序号" width="64" align="center"></el-table-column>
-                    <el-table-column prop="phone" label="授权号" align="center" min-width="140"></el-table-column>
-                    <el-table-column prop="allSale" label="商品类型" :show-overflow-tooltip="true" align="center" min-width="140"></el-table-column>
-                    <el-table-column prop="sale" label="商品名称" align="center"></el-table-column>
-                    <el-table-column prop="sale" label="出售价格" align="center"></el-table-column>
-                    <el-table-column prop="sale" label="商品状态" align="center"></el-table-column>
-                    <el-table-column prop="sale" label="发布日期" align="center"></el-table-column>
-                    <el-table-column prop="sale" label="联系电话" align="center"></el-table-column>
-                    <el-table-column prop="saleRate" label="审核状态" align="center"></el-table-column>
-                    <el-table-column label="操作" width="200" align="center">
+                    <el-table-column type="selection" align="center"></el-table-column>
+                    <el-table-column type="index" width="64" label="序号" align="center"></el-table-column>
+                    <el-table-column prop="phone" label="手机号" :show-overflow-tooltip="true"  align="center"></el-table-column>
+                    <el-table-column prop="item" label="中奖/兑换项目" :show-overflow-tooltip="true" align="center"></el-table-column>
+                    <el-table-column prop="number" label="数量/期限/价格" align="center"></el-table-column>
+                    <el-table-column prop="status" label="状态" align="center"></el-table-column>
+                    <el-table-column prop="time" label="中奖兑换时间" align="center"></el-table-column>
+                    <el-table-column label="操作" align="center">
                         <template slot-scope="scope">
-                            <el-button round type="primary" icon="el-icon-edit" size="mini"
-                                       @click.stop="editGroup(scope.row)">审核
-                            </el-button>
-                            <el-button round type="primary" icon="el-icon-edit" size="mini"
-                                       @click.stop="editGroup(scope.row)">下架
-                            </el-button>
-                            <el-button round type="danger" icon="el-icon-delete" size="mini"
-                                       @click.stop="removeOne(scope.row.groupName)">置顶
+                            <el-button round type="primary" size="mini"
+                                      :disabled="scope.row.disabled" @click.stop="dealExchange(scope.row)">完成
                             </el-button>
                         </template>
                     </el-table-column>
@@ -101,7 +96,48 @@
                 },
                 formLabelWidth: "120px",
                 title: '用户',
-                disableUserDialog: false
+                disableUserDialog: false,
+                itemOptions: [
+                    {
+                        label: '酷脸金牌会员',
+                        value: 1
+                    }, {
+                        label: '著录项目提交',
+                        value: 2
+                    },{
+                        label: '年费代缴',
+                        value: 3
+                    },{
+                        label: '专利热推',
+                        value: 4
+                    },{
+                        label: '红苗谷富硒小米',
+                        value: 5
+                    },{
+                        label: '商标注册1',
+                        value: 6
+                    },{
+                        label: '商标注册50',
+                        value: 7
+                    },{
+                        label: '商标注册199',
+                        value: 8
+                    },{
+                        label: '实用撰写',
+                        value: 9
+                    },{
+                        label: '年费代缴',
+                        value: 10
+                    }
+                ],
+                statusOptions: [
+                    {
+                        label: '待处理',
+                        value: 1
+                    }, {
+                        label: '已完成',
+                        value: 2
+                    }],
             }
         },
         mounted() {
@@ -113,7 +149,7 @@
                 return item.label.indexOf(query) > -1;
             },
             getList() {//获取页面数据
-                let url = `/getUserGoodsList?pageSize=${this.tableData.pageSize}&pageNumber=${this.tableData.currentPage}`;
+                let url = `/getExchangeList?pageSize=${this.tableData.pageSize}&pageNumber=${this.tableData.currentPage}`;
                 let selectPhone = this.selectForm.phone;
                 if (selectPhone !== '') {
                     url = url + '&selectPhone=' + selectPhone;
@@ -176,6 +212,9 @@
             submitDisable() {
                 console.log('提交禁用');
                 this.disableUserDialog = false;
+            },
+            dealExchange(e) {
+                e.disabled = true;
             }
         }
     }

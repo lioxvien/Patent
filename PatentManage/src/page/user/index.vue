@@ -29,16 +29,16 @@
                     <el-table-column prop="saleRate" label="出售率" align="center"></el-table-column>
                     <el-table-column prop="allBuy" label="发布求购商品数" align="center"></el-table-column>
                     <el-table-column prop="registerTime" label="注册时间" align="center"></el-table-column>
-<!--                    <el-table-column label="操作" width="200" align="center">-->
-<!--                        <template slot-scope="scope">-->
-<!--                            <el-button round type="primary" icon="el-icon-edit" size="mini"-->
-<!--                                       @click.stop="editGroup(scope.row)">编辑-->
-<!--                            </el-button>-->
-<!--                            <el-button round type="danger" icon="el-icon-delete" size="mini"-->
-<!--                                       @click.stop="removeOne(scope.row.groupName)">删除-->
-<!--                            </el-button>-->
-<!--                        </template>-->
-<!--                    </el-table-column>-->
+                    <!--                    <el-table-column label="操作" width="200" align="center">-->
+                    <!--                        <template slot-scope="scope">-->
+                    <!--                            <el-button round type="primary" icon="el-icon-edit" size="mini"-->
+                    <!--                                       @click.stop="editGroup(scope.row)">编辑-->
+                    <!--                            </el-button>-->
+                    <!--                            <el-button round type="danger" icon="el-icon-delete" size="mini"-->
+                    <!--                                       @click.stop="removeOne(scope.row.groupName)">删除-->
+                    <!--                            </el-button>-->
+                    <!--                        </template>-->
+                    <!--                    </el-table-column>-->
                 </el-table>
                 <el-pagination class="sys-fy" layout="total, sizes, prev, pager, next, jumper"
                                :total="tableData.tableSize" :paginationTotal="tableData.tableSize"
@@ -74,11 +74,11 @@
     import AppToolbar from "../../components/AppToolbar/index";
     export default {
         components: {AppSection, AppSearch, AppToolbar},
-        name: 'workgroupMembers',
+        name: 'user',
         data() {
             return {
                 selectForm: {
-                   phone: ''
+                    phone: ''
                 },
                 tableData: {
                     tableSize: 0,
@@ -102,24 +102,14 @@
             },
             getList() {//获取页面数据
                 let url = `/getUserGoodsList?pageSize=${this.tableData.pageSize}&pageNumber=${this.tableData.currentPage}`;
-                // let normName = this.selectForm.normName;
-                // let recordYear = this.selectForm.dataYear;
-                // let time = this.selectForm.time;
-                // if (normName !== '') {
-                //     url = url + '&normName=' + normName;
-                // }
-                // if (recordYear !== '') {
-                //     url = url + "&recordYear=" + recordYear;
-                // }
-                // if (time !== '') {
-                //     url = url + "&startTime=" + time[0] + "&endTime=" + time[1];
-                // }
-                console.log('getList')
+                let selectPhone = this.selectForm.phone;
+                if (selectPhone !== '') {
+                    url = url + '&selectPhone=' + selectPhone;
+                }
                 this.$axios({
                     methods: 'get',
                     url:url
                 }).then(res => {
-                    console.log(res)
                     this.tableData.body = res.data.list;
                     this.tableData.tableSize = res.data.totalElements;
                 }).catch(err => {
