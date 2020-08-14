@@ -1,0 +1,62 @@
+.sys-page {
+    .earnTitle,.payTitle {
+        text-align: center;
+        font-size: 18px;
+    }
+    .earnpoints {
+        .el-main{
+            .cardBox {
+                text-align: center;
+                padding-bottom: 15px;
+                .el-card {
+                    padding-bottom: 15px;
+                    p{
+                        padding: 10px;
+                        height: 50px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+        .el-aside {
+            padding-top: 19px;
+            .el-card {
+                height: 269px;
+            }
+        }
+    }
+    .paypoints {
+        .el-aside {
+            padding-top: 19px;
+            .el-row {
+               margin: 0!important;
+                .el-card {
+                    margin-bottom: 15px;
+                    height: 110px;
+                    font-size: 20px;
+                    text-align: center;
+                    .title {
+                        height: 38px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+                    .intro {
+                        color: red;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+                    .cur {
+                        height: 68px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+

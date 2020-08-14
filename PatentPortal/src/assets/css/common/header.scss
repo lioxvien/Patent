@@ -30,6 +30,9 @@
                 color: $headerColor;
                 cursor: pointer;
                 color: $headerColor;
+                .index {
+                    color: red;
+                }
                 .order:hover, .points:hover {
                     color: red;
                 }
@@ -63,5 +66,21 @@
     }
     .editPawDialog{
         width: 400px;
+        .invitation {
+            font-size: 25px;
+            text-indent: 2em;
+        }
+        .myQQ {
+            width: 65%;
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+        .myCode {
+            margin-left: 25%;
+            margin-right: 15px;
+        }
+        .refresh {
+            vertical-align: bottom;
+        }
     }
 }

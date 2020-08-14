@@ -1,0 +1,33 @@
+let data = {
+    'code':0,
+    'data': [
+        {
+            authorizationNumber: '220210255125',
+            commodityType: '发明',
+            commodityName:'散热装置',
+            price:'1.5k',
+            commodityStauts:'授权未缴费',
+            date:'2019-5-24',
+            phone:'18523452654'
+        },{
+            authorizationNumber: '220210255125',
+            commodityType: '发明',
+            commodityName:'散热装置',
+            price:'1.8k',
+            commodityStauts:'授权未缴费',
+            date:'2019-5-24',
+            phone:'18523452654'
+        },{
+            authorizationNumber: '220210255125',
+            commodityType: '发明',
+            commodityName:'散热装置',
+            price:'2k',
+            commodityStauts:'授权未缴费',
+            date:'2019-5-24',
+            phone:'18523452654'
+        }]
+};
+export default [{
+    path: '/getMyBuyGoodsList',
+    data: data
+}]

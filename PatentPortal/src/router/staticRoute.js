@@ -44,6 +44,16 @@ const staticRoute = [
       ]
     },
     {
+        path: '/myOrder',
+        component: Layout,
+        children:[
+            {
+                path: '',
+                component: () => import('../page/myOrder')
+            }
+        ]
+    },
+    {
         path: '/pointsmall',
         component: Layout,
         children:[

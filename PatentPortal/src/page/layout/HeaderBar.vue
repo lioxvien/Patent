@@ -16,12 +16,12 @@
                             <el-dropdown-item command="collection">我的收藏</el-dropdown-item>
                             <el-dropdown-item command="sale">出售商品</el-dropdown-item>
                             <el-dropdown-item command="buy">求购商品</el-dropdown-item>
-                            <el-dropdown-item command="paid">已支付订单</el-dropdown-item>
+<!--                            <el-dropdown-item command="paid">已支付订单</el-dropdown-item>-->
                         </el-dropdown-menu>
                     </el-dropdown>
                 </li>
                 <li>
-                    <span class="points" @click="pointsMall">积分商城</span>
+                    <span class="points" @click="toPage('/pointsmall')">积分商城</span>
                 </li>
                 <li v-if="!$store.state.user.name">
                     <span class="register" @click="toLogin(0)">免费注册</span>
@@ -32,14 +32,17 @@
                     <el-dropdown @command="userOperation" v-else>
                         <span class="user">{{username}}<i class="el-icon-caret-bottom el-icon--right"></i></span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="editPaw">我的邀请码</el-dropdown-item>
-                            <el-dropdown-item command="editPaw">我的QQ</el-dropdown-item>
-                            <el-dropdown-item command="editPaw">我的二维码</el-dropdown-item>
+                            <el-dropdown-item command="invitation">我的邀请码</el-dropdown-item>
+                            <el-dropdown-item command="modifyQQ">我的QQ</el-dropdown-item>
+                            <el-dropdown-item command="myCode">我的二维码</el-dropdown-item>
                             <el-dropdown-item command="editPaw">修改密码</el-dropdown-item>
-                            <el-dropdown-item command="editPaw">修改注册手机号</el-dropdown-item>
+                            <el-dropdown-item command="editPhone">修改注册手机号</el-dropdown-item>
                             <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
+                </li>
+                <li>
+                    <span class="index" @click="toPage('/home')">首页</span>
                 </li>
             </ul>
             <div>
@@ -79,7 +82,34 @@
                 </el-form-item>
             </el-form>
             <div class="textC">
-                <el-button type="primary" @click="editPawSubmit">保存</el-button>
+                <el-button type="primary" @click="editSubmit('editPaw')">保存</el-button>
+            </div>
+        </el-dialog>
+        <el-dialog title="我的邀请码" :visible.sync="dialog.invitation.show" :modal-append-to-body="false" custom-class="editPawDialog">
+           <p class="invitation">SJFUIF5966352</p>
+        </el-dialog>
+        <el-dialog title="我的QQ" :visible.sync="dialog.modifyQQ.show" :modal-append-to-body="false" custom-class="editPawDialog">
+            <el-input v-model="myQQ" class="myQQ"></el-input>
+            <el-button type="primary" @click="editSubmit('modifyQQ')">确定</el-button>
+        </el-dialog>
+        <el-dialog title="我的二维码" :visible.sync="dialog.myCode.show" :modal-append-to-body="false" custom-class="editPawDialog">
+            <img :src="myCodeImg" alt="" class="myCode">
+            <el-button type="text" class="refresh">刷新</el-button>
+        </el-dialog>
+        <el-dialog title="修改手机号" :visible.sync="dialog.editPhone.show" :modal-append-to-body="false" custom-class="editPawDialog">
+            <el-form :model="editPhone" :rules="editPawRules" ref="editPhone" label-width="100px" >
+                <el-form-item label="原手机号" prop="oldPhone">
+                    <el-input v-model="editPhone.oldPhone" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="password">
+                    <el-input v-model="editPhone.password" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="新手机号" prop="newPhone">
+                    <el-input v-model="editPhone.newPhone" auto-complete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div class="textC">
+                <el-button type="primary" @click="editSubmit('editPhone')">保存</el-button>
             </div>
         </el-dialog>
         <ReleaseSale :dialogVisible="saleDialogVisible" :title='titleDialog' @closeDialog="closeSaleDialog"></ReleaseSale>
@@ -95,17 +125,28 @@
         components:{ ReleaseSale },
         data() {
             return {
+                myCodeImg: require('../../assets/images/code.jpg'),
                 headerSearch: {
                     select:'',
                     context: ''
                 },
                 dialog: {
-                    editPaw: {show: false}
+                    invitation: {show: false},
+                    modifyQQ: {show: false},
+                    myCode: {show: false},
+                    editPaw: {show: false},
+                    editPhone: {show: false},
                 },
+                myQQ: '549809311',
                 editPaw: {
                     oldPaw: '',
                     newPaw: '',
                     confirmNewPaw: ''
+                },
+                editPhone:{
+                    oldPhone: '',
+                    password: '',
+                    newPhone: ''
                 },
                 editPawRules: {
                     oldPaw: [
@@ -159,16 +200,25 @@
               }),
             userOperation(command){
                switch(command){
-                    case 'logout':
-                        this.sysLogout()
-                        break
+                   case 'invitation':
+                       this.dialog.invitation.show = true
+                       break;
+                   case 'modifyQQ':
+                       this.dialog.modifyQQ.show = true
+                       break;
+                   case 'myCode':
+                       this.dialog.myCode.show = true
+                       break;
                     case 'editPaw':
                         this.dialog.editPaw.show = true
                         break
-                    case 'mailCenter':
-                        this.$router.push('mailCenter');
+                    case 'editPhone':
+                        this.dialog.editPhone.show = true
                         break;
-                    }
+                   case 'logout':
+                       this.sysLogout()
+                       break
+                }
             },
             seeOrder(command) {
                  switch(command) {
@@ -176,10 +226,10 @@
                          console.log('我的收藏');
                          break;
                      case 'sale':
-                         console.log('出售商品');
+                         this.$router.push('/myOrder')
                          break;
                      case 'buy':
-                         console.log('求购商品');
+                         this.$router.push('/myOrder')
                          break;
                      case 'paid':
                          console.log('已支付');
@@ -189,12 +239,13 @@
             toLogin(type) {
                 this.$router.push({path:'/login',query: type})
             },
-            editPawSubmit(){
+            editSubmit(value){
                 console.log('提交修改密码')
+                this.dialog[value].show = false;
             },
-            pointsMall() {
+            toPage(path) {
                 console.log('积分商城');
-                this.$router.push({path: '/pointsmall'})
+                this.$router.push({path: path})
             },
             myOrder() {
                 console.log('我的订单');

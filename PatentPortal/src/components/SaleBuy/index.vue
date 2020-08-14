@@ -1,6 +1,6 @@
 <template>
     <div class="saleBuy">
-        <Condition></Condition>
+        <Condition v-if="type!=='my'"></Condition>
         <div class="sort">
             <p :class="sort==='default'?'cur':''" @click="changSort('default')">智能排序</p>
             <p :class="sort==='price'?'cur':''" @click="changSort('price')">价格排序</p>
@@ -38,7 +38,7 @@
     import Condition from '../../components/Condition'
     export default{
         name: 'saleBuy',
-        props:['info'],
+        props:['info','type'],
         components: {  Condition },
         data() {
             return {
@@ -63,7 +63,8 @@
                 this.getList();
             },
             getList() {
-                let url =this.info ==='buy'? '/getBuyGoodsList': '/getSaleGoodsList'
+                let url =this.info ==='buy'? '/getAllBuyGoodsList': '/getAllSaleGoodsList'
+                url = this.type === 'my'? url.replace('All','My'): url;
                 this.$axios({
                     url: url,
                     method: 'get',
