@@ -1,6 +1,7 @@
 <template>
     <div class="s-canvas">
         <canvas id="s-canvas" :width="contentWidth" :height="contentHeight"></canvas>
+        <el-button class="change" size="small" type="text" @click="change">看不清，换一张</el-button>
     </div>
 </template>
 <script>
@@ -13,7 +14,7 @@
             },
             fontSizeMin: {
                 type: Number,
-                default: 16
+                default: 20
             },
             fontSizeMax: {
                 type: Number,
@@ -118,6 +119,9 @@
                     ctx.arc(this.randomNum(0, this.contentWidth), this.randomNum(0, this.contentHeight), 1, 0, 2 * Math.PI)
                     ctx.fill()
                 }
+            },
+            change() {
+                this.$emit('changIdentify')
             }
         },
         watch: {
@@ -133,5 +137,11 @@
 <style>
     .s-canvas {
         display: inline-block;
+        position: relative;
+    }
+    .change {
+        position: absolute;
+        top: 32px;
+        right: 5px;
     }
 </style>

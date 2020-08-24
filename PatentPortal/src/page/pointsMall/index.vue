@@ -75,12 +75,15 @@
                 </el-row>
             </el-aside>
         </el-container>
+        <LuckDraw></LuckDraw>
     </div>
 </template>
 
 <script>
+    import LuckDraw from '../../components/luckDraw'
   export default {
       name: 'pointsmall',
+      components:{ LuckDraw },
       data() {
           return {
               myPoints: 3000,

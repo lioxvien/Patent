@@ -19,7 +19,6 @@ export default {
     },
     props: ['layout'],
     mounted() {
-        console.log(this.navList);
     },
     computed:{
         ...mapState({

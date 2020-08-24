@@ -6,7 +6,10 @@ export default {
   // 导航条位置   left / top
   navbarPosition: 'top',
   // 当前系统主题  dark
-  theme: ''
+  theme: '',
   // 通知框等需要自动消失的时间
   // duration: 5000
+
+    // 切换我的订单中出售求购收藏的标签页
+    activeName: '',
 }

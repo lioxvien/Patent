@@ -65,7 +65,7 @@
                             password: this.loginForm.password
                         }).then(res => {
                             if(res.code===0){
-                                this.$router.push('home');
+                                this.$router.push('user');
                             } else {
                                 this.sysMsg = res.message
                             }

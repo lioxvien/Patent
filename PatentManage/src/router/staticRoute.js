@@ -34,12 +34,12 @@ const staticRoute = [
       component: () => import(/* webpackChunkName: 'login' */ '../page/login')
     },
     {
-      path: '/home',
+      path: '/exchange',
       component: Layout,
       children:[
         {
             path: '',
-            component: () => import('../page/home')
+            component: () => import('../page/exchange')
         }
       ]
     },
