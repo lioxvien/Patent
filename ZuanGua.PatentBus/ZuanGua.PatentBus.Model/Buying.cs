@@ -1,4 +1,4 @@
-namespace ZuanGua.PatentBus.Model
+﻿namespace ZuanGua.PatentBus.Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,20 +6,15 @@ namespace ZuanGua.PatentBus.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Commodity")]
-    public partial class Commodity
+    [Table("Buying")]
+    public partial class Buying
     {
+        [Key]
         [StringLength(50)]
         public string CommodityID { get; set; }
 
         [StringLength(50)]
-        public string AuthorizationNumber { get; set; }
-
-        [StringLength(50)]
         public string CommodityType { get; set; }
-
-        [StringLength(50)]
-        public string CommodityName { get; set; }
 
         [StringLength(50)]
         public string CommodityField { get; set; }
@@ -32,8 +27,6 @@ namespace ZuanGua.PatentBus.Model
         [StringLength(50)]
         public string LinkMobile { get; set; }
 
-        public int? ComplaintCount { get; set; }
-
         public DateTime? ReviewTime { get; set; }
 
         public int? ReviewStatus { get; set; }
@@ -42,6 +35,7 @@ namespace ZuanGua.PatentBus.Model
         public string ReviewUser { get; set; }
 
         public DateTime? CreateTime { get; set; }
+
         [StringLength(50)]
         public string CreateUser { get; set; }
     }

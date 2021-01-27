@@ -249,6 +249,7 @@
   <ItemGroup>
     <Compile Include="App_Start\Manage\MvcControllerBase.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Buying\BuyingGoodsController.cs" />
     <Compile Include="Controllers\Commodity\CommodityController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -287,6 +288,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\BuyingGoods\" />
     <Folder Include="Views\SellIndex\" />
   </ItemGroup>
   <ItemGroup>

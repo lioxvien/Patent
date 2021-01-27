@@ -4,66 +4,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using ZuanGua.PatentBus.BLL;
 using ZuanGua.PatentBus.Common;
 using ZuanGua.PatentBus.Model;
 
-namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
+namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
 {
-    public class CommodityController : Controller
+    public class BuyingGoodsController : Controller
     {
-        CommodityBll ComBll = new CommodityBll();
-
-        // GET: Model.Commodity
-        public ActionResult SellIndex()
+        BuyingBLL BLL = new BuyingBLL();
+        // GET: BuyingGoods
+        public ActionResult Index()
         {
             return View();
-        }
-
-        public string GetMySellList()
-        {
-            var list = ComBll.GetAllInfo();
-
-            return JsonConvert.SerializeObject(list.ToArray());
-        }
-
-        //添加信息
-        public ActionResult AddInfo(Model.Commodity model)
-        {
-            var info = ComBll.GetInfobyNum(model.AuthorizationNumber);
-            string res = "";
-            if (info.Count() > 0)
-            {
-
-                res = "1";        //不能重复发布同一授权号的商品
-            }
-            else
-            {
-                ComBll.InsertInfo(model);
-                res = "2";       //添加成功
-            }
-
-            return Redirect("SellIndex?res=" + res);
-        }
-
-        public string DeleteInfo(string id)
-        {
-            if (ComBll.DeleteInfo(id))
-            {
-                return "0";     //删除成功
-            }
-            else
-            {
-                return "1";     //删除失败，请重试
-            }
-        }
-
-        public void DeleteBatch(List<Model.Commodity> models)
-        {
-            ComBll.DeleteInfo(models);
         }
 
         /// <summary>
@@ -72,11 +27,11 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Model.Commodity> AddUserInfo(Model.Commodity Model)
+        public JsonSoloEntity<Buying> AddUserInfo(Buying Model)
         {
-            JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
+            JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
             Model.CommodityID = Guid.NewGuid().ToString();
-            if (ComBll.InsertInfo(Model))
+            if (BLL.InsertInfo(Model))
             {
                 result.success = "true";
                 result.data = Model;
@@ -89,17 +44,17 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Model.Commodity> UpdUserInfo(Model.Commodity Model)
+        public JsonSoloEntity<Buying> UpdUserInfo(Buying Model)
         {
-            JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
-            Model.Commodity item = ComBll.Identity(Model.CommodityID);
+            JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
+            Buying item = BLL.Identity(Model.CommodityID);
             if (item != null)
             {
                 item.CommodityType = Model.CommodityType;
                 item.CommodityField = Model.CommodityField;
                 item.SalePrice = Model.SalePrice;
                 item.LinkMobile = Model.LinkMobile;
-                if (ComBll.UpdateInfo(item))
+                if (BLL.UpdateInfo(item))
                 {
                     result.success = "true";
                     result.data = item;
@@ -120,20 +75,20 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         }
 
         /// <summary>
-        /// 审核信息
+        /// 审核求购信息
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Model.Commodity> CheckUserInfo(Model.Commodity Model)
+        public JsonSoloEntity<Buying> CheckUserInfo(Buying Model)
         {
-            JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
-            Model.Commodity item = ComBll.Identity(Model.CommodityID);
+            JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
+            Buying item = BLL.Identity(Model.CommodityID);
 
             if (item != null)
             {
                 item.CommodityState = Model.CommodityState;
-                if (ComBll.UpdateInfo(item))
+                if (BLL.UpdateInfo(item))
                 {
                     result.success = "true";
                     result.data = item;
@@ -151,16 +106,15 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
             }
             return result;
         }
-
         /// <summary>
         /// 分页列表
         /// </summary>
         /// <param name="UserID"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonListEntity<Model.Commodity> GetCommodityList(int PageSize, int pageIndex, string UserId)
+        public JsonListEntity<Buying> GetBuyingList(int PageSize, int pageIndex, string UserId)
         {
-            JsonListEntity<Model.Commodity> result = new JsonListEntity<Model.Commodity>();
+            JsonListEntity<Buying> result = new JsonListEntity<Buying>();
 
             //if (UserId == "")
             //{
@@ -182,11 +136,11 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
             page.total = 0;
             page.condition = JsonConvert.SerializeObject(ht);
 
-            List<Model.Commodity> list = new List<Model.Commodity>();
+            List<Buying> list = new List<Buying>();
 
             page.orderrow = "CreatTime";
             page.ordertype = "desc";
-            DataTable dtWaitService = ComBll.GetCommodityList(page);
+            DataTable dtWaitService = BLL.GetBuyingList(page);
 
             result.success = "true";
             result.data = list;
@@ -199,10 +153,10 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public JsonSoloEntity<Model.Commodity> GetCommodityById(string ID)
+        public JsonSoloEntity<Buying> GetBuyingById(string ID)
         {
-            JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
-            CommodityBll bll = new CommodityBll();
+            JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
+            BuyingBLL bll = new BuyingBLL();
             if (ID == "")
             {
                 result.success = "false";
@@ -210,7 +164,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.errorMsg = "求购编号不能为空！";
                 return result;
             }
-            Model.Commodity model = bll.Identity(ID);
+            Buying model = bll.Identity(ID);
             result.success = "true";
             result.data = model;
             return result;
@@ -222,9 +176,9 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="UserID"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonListEntity<Model.Commodity> MyCommodityList(string UserID)
+        public JsonListEntity<Buying> MyBuyingList(string UserID)
         {
-            JsonListEntity<Model.Commodity> result = new JsonListEntity<Model.Commodity>();
+            JsonListEntity<Buying> result = new JsonListEntity<Buying>();
             if (UserID == "")
             {
                 result.success = "false";
@@ -232,7 +186,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.errorMsg = "用户编号不能为空！";
                 return result;
             }
-            List<Model.Commodity> list = ComBll.GetCommodity(UserID).ToList();
+            List<Buying> list = BLL.GetBuying(UserID).ToList();
             if (list.Count == 0)
             {
                 result.success = "false";
@@ -251,10 +205,10 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="UID"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonEntity DelCommodity(string ID)
+        public JsonEntity DelBuying(string ID)
         {
             JsonEntity result = new JsonEntity();
-            CommodityBll ticket = new CommodityBll();
+            BuyingBLL ticket = new BuyingBLL();
             result.success = "false";
             if (ticket.DeleteInfo(ID))
             {
@@ -263,5 +217,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
 
             return result;
         }
+
+
     }
 }

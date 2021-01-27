@@ -10,35 +10,33 @@ using ZuanGua.PatentBus.Model;
 
 namespace ZuanGua.PatentBus.BLL
 {
-    public class CommodityBll
+    public class BuyingBLL
     {
-        CommodityDal dal = new CommodityDal();
+        BuyingDAL dal = new BuyingDAL();
 
         /// <summary>
         /// 获取所有出售信息
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Commodity> GetAllInfo()
+        public IQueryable<Buying> GetAllInfo()
         {
             return dal.GetAllInfo();
         }
-
         /// <summary>
-        /// 根据授权号获取信息
+        /// 获取求购信息
         /// </summary>
-        /// <param name="AuthorizationNumber"></param>
+        /// <param name="UserID">UserID</param>
         /// <returns></returns>
-        public IQueryable<Commodity> GetInfobyNum(string AuthorizationNumber)
+        public IQueryable<Buying> GetBuying(string UserID)
         {
-            return dal.GetInfobyNum(AuthorizationNumber);
+            return dal.GetBuying(UserID);
         }
-
         /// <summary>
         /// 根据id获取信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Commodity Identity(string id)
+        public Buying Identity(string id)
         {
             return dal.LoadEntity(id);
         }
@@ -48,10 +46,9 @@ namespace ZuanGua.PatentBus.BLL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool InsertInfo(Commodity model)
+        public bool InsertInfo(Buying model)
         {
             model.CommodityID = Guid.NewGuid().ToString();
-            model.ComplaintCount = 0;
             model.CreateTime = DateTime.Now;
 
             return Convert.ToBoolean(dal.Insert(model));
@@ -61,7 +58,7 @@ namespace ZuanGua.PatentBus.BLL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool UpdateInfo(Commodity model)
+        public bool UpdateInfo(Buying model)
         {
             return Convert.ToBoolean(dal.Update(model));
         }
@@ -75,36 +72,26 @@ namespace ZuanGua.PatentBus.BLL
             var info = Identity(id);
             return Convert.ToBoolean(dal.Delete(info));
         }
-
-        /// <summary>
-        /// 删除信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public void DeleteInfo(List<Commodity> models)
-        {
-            foreach (var item in models)
-            {
-                dal.Delete(item);
-            }
-        }
-        /// <summary>
-        /// 获取求购信息
-        /// </summary>
-        /// <param name="UserID">UserID</param>
-        /// <returns></returns>
-        public IQueryable<Commodity> GetCommodity(string UserID)
-        {
-            return dal.GetCommodity(UserID);
-        }
         /// <summary>
         /// 专利分页
         /// </summary>
         /// <param name="page">分页类</param>
         /// <returns></returns>
-        public DataTable GetCommodityList(PageModels page)
+        public DataTable GetBuyingList(PageModels page)
         {
-            return dal.GetCommodityList(page);
+            return dal.GetBuyingList(page);
+        }
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public void DeleteInfo(List<Buying> models)
+        {
+            foreach (var item in models)
+            {
+                dal.Delete(item);
+            }
         }
     }
 }
