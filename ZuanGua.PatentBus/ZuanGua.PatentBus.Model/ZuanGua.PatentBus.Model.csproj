@@ -55,12 +55,14 @@
     <Compile Include="Buying.cs" />
     <Compile Include="Commodity.cs" />
     <Compile Include="Complaint.cs" />
+    <Compile Include="DataModel.cs" />
     <Compile Include="JsonEntity.cs" />
     <Compile Include="JsonListEntity.cs" />
     <Compile Include="JsonSoloEntity.cs" />
     <Compile Include="ProjectModel.cs" />
+    <Compile Include="SMS_Send.cs" />
+    <Compile Include="SMS_Send_log.cs" />
     <Compile Include="SYS_USER.cs" />
-    <Compile Include="DataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

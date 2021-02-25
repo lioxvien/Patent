@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="BuyingBLL.cs" />
     <Compile Include="CommodityBll.cs" />
+    <Compile Include="SMS_SendBLL.cs" />
+    <Compile Include="SMS_Send_logBLL.cs" />
     <Compile Include="UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

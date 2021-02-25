@@ -23,6 +23,8 @@
         public virtual DbSet<SYS_USER> SYS_USER { get; set; }
         public virtual DbSet<Commodity> Commodity { get; set; }
         public virtual DbSet<Complaint> Complaint { get; set; }
+        public virtual DbSet<SMS_Send> SMS_Send { get; set; }
+        public virtual DbSet<SMS_Send_log> SMS_Send_log { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -96,6 +98,19 @@
 
             modelBuilder.Entity<Complaint>()
                 .Property(e => e.ReviewUser)
+                .IsUnicode(false);
+            modelBuilder.Entity<SMS_Send>()
+    .Property(e => e.smsCode)
+    .IsFixedLength()
+    .IsUnicode(false);
+
+            modelBuilder.Entity<SMS_Send_log>()
+                .Property(e => e.smsCode)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SMS_Send_log>()
+                .Property(e => e.ErrorDes)
                 .IsUnicode(false);
         }
     }

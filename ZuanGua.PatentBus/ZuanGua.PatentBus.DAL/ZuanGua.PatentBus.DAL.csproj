@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="BuyingDAL.cs" />
     <Compile Include="CommodityDal.cs" />
+    <Compile Include="SMS_SendDAL.cs" />
+    <Compile Include="SMS_Send_logDAL.cs" />
     <Compile Include="UserDal.cs" />
     <Compile Include="DbBase\BaseDal.cs" />
     <Compile Include="DbBase\BaseFactory.cs" />
