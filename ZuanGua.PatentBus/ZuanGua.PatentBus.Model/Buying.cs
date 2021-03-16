@@ -1,4 +1,4 @@
-﻿namespace ZuanGua.PatentBus.Model
+namespace ZuanGua.PatentBus.Model
 {
     using System;
     using System.Collections.Generic;

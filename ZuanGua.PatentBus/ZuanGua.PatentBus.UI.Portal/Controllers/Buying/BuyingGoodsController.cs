@@ -27,7 +27,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Buying> AddUserInfo(Buying Model)
+        public string AddUserInfo(Buying Model)
         {
             JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
             Model.CommodityID = Guid.NewGuid().ToString();
@@ -36,7 +36,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
                 result.success = "true";
                 result.data = Model;
             }
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
         /// <summary>
         /// 修改求购信息
@@ -44,7 +44,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Buying> UpdUserInfo(Buying Model)
+        public string UpdUserInfo(Buying Model)
         {
             JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
             Buying item = BLL.Identity(Model.CommodityID);
@@ -71,7 +71,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
                 result.errorMsg = "未找到该专利信息";
             }
 
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Buying> CheckUserInfo(Buying Model)
+        public string CheckUserInfo(Buying Model)
         {
             JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
             Buying item = BLL.Identity(Model.CommodityID);
@@ -104,7 +104,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
                 result.success = "false";
                 result.errorMsg = "未找到该专利信息";
             }
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
         /// <summary>
         /// 分页列表
@@ -112,7 +112,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// <param name="UserID"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonListEntity<Buying> GetBuyingList(int PageSize, int pageIndex, string UserId)
+        public string GetBuyingList(int PageSize, int pageIndex, string UserId)
         {
             JsonListEntity<Buying> result = new JsonListEntity<Buying>();
 
@@ -145,7 +145,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
             result.success = "true";
             result.data = list;
             result.count = page.total;
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -153,21 +153,21 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public JsonSoloEntity<Buying> GetBuyingById(string ID)
+        public string GetBuyingById(string ID)
         {
             JsonSoloEntity<Buying> result = new JsonSoloEntity<Buying>();
             BuyingBLL bll = new BuyingBLL();
-            if (ID == "")
+            if (ID == ""|| ID == null)
             {
                 result.success = "false";
                 result.count = 0;
                 result.errorMsg = "求购编号不能为空！";
-                return result;
+                return JsonConvert.SerializeObject(result);
             }
             Buying model = bll.Identity(ID);
             result.success = "true";
             result.data = model;
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -176,27 +176,27 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// <param name="UserID"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonListEntity<Buying> MyBuyingList(string UserID)
+        public string MyBuyingList(string UserID)
         {
             JsonListEntity<Buying> result = new JsonListEntity<Buying>();
-            if (UserID == "")
+            if (UserID == ""|| UserID == null)
             {
                 result.success = "false";
                 result.count = 0;
                 result.errorMsg = "用户编号不能为空！";
-                return result;
+                return JsonConvert.SerializeObject(result);
             }
             List<Buying> list = BLL.GetBuying(UserID).ToList();
             if (list.Count == 0)
             {
                 result.success = "false";
                 result.errorMsg = "暂无数据！";
-                return result;
+                return JsonConvert.SerializeObject(result);
             }
             result.data = list;
             result.count = list.Count;
             result.success = "true";
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -205,17 +205,24 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.BuyingGoods
         /// <param name="UID"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonEntity DelBuying(string ID)
+        public string DelBuying(string ID)
         {
             JsonEntity result = new JsonEntity();
             BuyingBLL ticket = new BuyingBLL();
+            if (ID == "" || ID == null)
+            {
+                result.success = "false";
+                result.count = 0;
+                result.errorMsg = "求购编号不能为空！";
+                return JsonConvert.SerializeObject(result);
+            }
             result.success = "false";
             if (ticket.DeleteInfo(ID))
             {
                 result.success = "true";
             }
 
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
 

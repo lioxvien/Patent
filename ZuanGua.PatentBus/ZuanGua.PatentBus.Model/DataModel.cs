@@ -21,6 +21,7 @@
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。
 
         public virtual DbSet<SYS_USER> SYS_USER { get; set; }
+        public virtual DbSet<Buying> Buying { get; set; }
         public virtual DbSet<Commodity> Commodity { get; set; }
         public virtual DbSet<Complaint> Complaint { get; set; }
         public virtual DbSet<SMS_Send> SMS_Send { get; set; }
@@ -111,6 +112,33 @@
 
             modelBuilder.Entity<SMS_Send_log>()
                 .Property(e => e.ErrorDes)
+                .IsUnicode(false);
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.CommodityID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.CommodityType)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.CommodityField)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.CommodityState)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.LinkMobile)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.ReviewUser)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Buying>()
+                .Property(e => e.CreateUser)
                 .IsUnicode(false);
         }
     }

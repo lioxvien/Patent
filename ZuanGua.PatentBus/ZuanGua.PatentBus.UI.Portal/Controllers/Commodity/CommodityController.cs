@@ -72,7 +72,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Model.Commodity> AddUserInfo(Model.Commodity Model)
+        public string AddUserInfo(Model.Commodity Model)
         {
             JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
             Model.CommodityID = Guid.NewGuid().ToString();
@@ -81,7 +81,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.success = "true";
                 result.data = Model;
             }
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
         /// <summary>
         /// 修改求购信息
@@ -89,7 +89,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Model.Commodity> UpdUserInfo(Model.Commodity Model)
+        public string UpdUserInfo(Model.Commodity Model)
         {
             JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
             Model.Commodity item = ComBll.Identity(Model.CommodityID);
@@ -116,7 +116,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.errorMsg = "未找到该专利信息";
             }
 
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonSoloEntity<Model.Commodity> CheckUserInfo(Model.Commodity Model)
+        public string CheckUserInfo(Model.Commodity Model)
         {
             JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
             Model.Commodity item = ComBll.Identity(Model.CommodityID);
@@ -149,7 +149,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.success = "false";
                 result.errorMsg = "未找到该专利信息";
             }
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="UserID"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonListEntity<Model.Commodity> GetCommodityList(int PageSize, int pageIndex, string UserId)
+        public string GetCommodityList(int PageSize, int pageIndex, string UserId)
         {
             JsonListEntity<Model.Commodity> result = new JsonListEntity<Model.Commodity>();
 
@@ -191,7 +191,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
             result.success = "true";
             result.data = list;
             result.count = page.total;
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public JsonSoloEntity<Model.Commodity> GetCommodityById(string ID)
+        public string GetCommodityById(string ID)
         {
             JsonSoloEntity<Model.Commodity> result = new JsonSoloEntity<Model.Commodity>();
             CommodityBll bll = new CommodityBll();
@@ -208,12 +208,12 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.success = "false";
                 result.count = 0;
                 result.errorMsg = "求购编号不能为空！";
-                return result;
+                return JsonConvert.SerializeObject(result);
             }
             Model.Commodity model = bll.Identity(ID);
             result.success = "true";
             result.data = model;
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="UserID"></param>
         /// <returns></returns>
         [HttpGet]
-        public JsonListEntity<Model.Commodity> MyCommodityList(string UserID)
+        public string MyCommodityList(string UserID)
         {
             JsonListEntity<Model.Commodity> result = new JsonListEntity<Model.Commodity>();
             if (UserID == "")
@@ -230,19 +230,19 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.success = "false";
                 result.count = 0;
                 result.errorMsg = "用户编号不能为空！";
-                return result;
+                return JsonConvert.SerializeObject(result);
             }
             List<Model.Commodity> list = ComBll.GetCommodity(UserID).ToList();
             if (list.Count == 0)
             {
                 result.success = "false";
                 result.errorMsg = "暂无数据！";
-                return result;
+                return JsonConvert.SerializeObject(result);
             }
             result.data = list;
             result.count = list.Count;
             result.success = "true";
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
         /// <param name="UID"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonEntity DelCommodity(string ID)
+        public string DelCommodity(string ID)
         {
             JsonEntity result = new JsonEntity();
             CommodityBll ticket = new CommodityBll();
@@ -261,7 +261,7 @@ namespace ZuanGua.PatentBus.UI.Portal.Controllers.Commodity
                 result.success = "true";
             }
 
-            return result;
+            return JsonConvert.SerializeObject(result);
         }
     }
 }
